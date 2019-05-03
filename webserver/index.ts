@@ -46,7 +46,7 @@ export class Server {
     constructor() {     
         this.app = express();        
         this.app.use(bodyParser.json());
-        this.app.get('*', express.static(path.join(__dirname, "../PictureShop/dist/PictureShop")));      
+        this.app.get('*', express.static(path.join(__dirname, "../frontend/dist/PictureShop")));      
         this.app.get('/api/artitems', this.itemEPHandler.bind(this))
         this.app.post('/api/login', this.loginEPHandler.bind(this))
         this.app.post('/api/buy', this.buyEPHandler.bind(this))
