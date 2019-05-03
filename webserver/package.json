@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node index.ts",
+    "start": "ts-node src/index.ts",
     "start-dev": "nodemon",
     "test": "jasmine-ts --config=jasmine.json",
     "testWithCoverage": "nyc -r lcov -e .ts -x \"*.test.ts\" jasmine-ts --config=jasmine.json && nyc report"
@@ -17,6 +17,7 @@
     "@types/express": "^4.16.0",
     "@types/jest": "^23.3.10",
     "@types/mongodb": "^3.1.17",
+    "@types/mysql": "^2.15.6",
     "body-parser": "^1.18.3",
     "crypto-js": "^3.1.9-1",
     "express": "^4.16.4",
@@ -29,7 +30,7 @@
     "mysql": "^2.17.1",
     "nodemon": "^1.18.9",
     "uuid": "^3.3.2",
-    "winston": "^3.1.0"
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "@types/chai": "^4.1.7",

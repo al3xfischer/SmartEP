@@ -3,6 +3,7 @@ import ConnectToDb from "./mongo";
 import { Item } from "./models";
 import logger from "./logger";
 import jwt = require("jsonwebtoken");
+import * as mysql from "mysql";
 
 const uuid = require("uuid/v4");
 const secret = "Cm37oreTmbKYgLer8VUl";
@@ -11,25 +12,31 @@ const secret = "Cm37oreTmbKYgLer8VUl";
 
 export default class Store {
   private db: Db;
-  private mysql      = require('mysql');
-  private  connection = this.mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : 'smarteppw'
-  });
-
-  private client: MongoClient;
+  private  connection: mysql.Connection;
+  // private client: MongoClient;
 
   constructor() {
+    this.connection = mysql.createConnection({
+      host     : 'localhost',
+      user     : 'root',
+      password : 'smarteppw',
+      port     : 3306,
+      database : 'smartep',
+    });
     this.getUserUuid.bind(this);
     this.getUserRole.bind(this);
     this.validateUserCredentials.bind(this);
     this.connection.connect();
+
+    this.connection.query('select * from users',(err,results,fields) => {
+      if (err) throw err;
+      console.log(results);
+    });
   }
 
   public async setupDb() {
-    this.client = await ConnectToDb("webshop");
-    this.db = this.client.db();
+    // this.client = await ConnectToDb("webshop");
+    // this.db = this.client.db();
     logger.info("db ready");
   }
 
