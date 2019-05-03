@@ -1,5 +1,14 @@
 {
-    "ignore": ["**/*.test.ts", "**/*.spec.ts", ".git", "node_modules"],
-    "exec": "npx ts-node index.ts",
+    "ignore": [
+        "**/*.test.ts",
+        "**/*.spec.ts",
+        ".git",
+        "node_modules"
+    ],
+    "watch": [
+        "src",
+        "src/*"
+    ],
+    "exec": "npx ts-node ./src/index.ts",
     "ext": "ts"
 }

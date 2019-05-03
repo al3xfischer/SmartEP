@@ -1,0 +1,8 @@
+<div class="flex-container center">
+  <div *ngFor="let item of this.items">
+    <app-card [item]='item'></app-card>
+  </div>
+  <div *ngIf="this.showMoreVisible" class="text-center w-100 m-3 mb-4">
+    <input type="button" class="btn bg-dark text-light" value="Show more" (click)="loadMore()" />
+  </div>
+</div>

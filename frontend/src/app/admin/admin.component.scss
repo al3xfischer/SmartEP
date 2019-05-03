@@ -1,0 +1,63 @@
+.container-fluid{
+    padding-top: 5%;
+    padding-bottom: 2%;
+}
+
+table{
+    border: 1px solid black;
+    margin: auto;
+
+    thead{
+        text-align: center;
+
+        th{
+            column-span: all;
+        }
+    }
+
+    tr{
+        border: 1px solid black;
+        border-radius: 0.5em;
+
+        td{
+            border: 1px solid black;
+            min-width: 14em;
+
+            h3,h5,h6 {
+                margin: auto;
+                display: block;
+            }
+
+            #text-container{
+                padding: 1em;
+            }
+
+            #pic-container{
+                width: 20em;
+                margin: auto;
+                padding: 0.5em;
+            }
+
+            img{
+                width: 100%;
+                border-radius: 0.3em;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .container-fluid{
+        padding-top: 10%;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .container-fluid{
+        padding-top: 20%;
+    }
+
+    .pic-column{
+        display: none;
+    }
+}

@@ -1,0 +1,19 @@
+<div class="container shadow p-3 mb-3">
+  <div class="row justify-content-center pic-container">
+    <img  [src]="path + '?bearer=' + token" [alt]="title" />
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-8 text-left">
+      <h6>{{title}}</h6>
+    </div>
+    <div class="col-3 text-right">
+      <h6>
+       {{price}}$
+      </h6>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <input type="button" (click)="details()" class="btn col-5 bg-secondary" value="Details" />
+    <input type="button" (click)="buy()" class="btn col-5 bg-success" value="Buy" />
+  </div>
+</div>

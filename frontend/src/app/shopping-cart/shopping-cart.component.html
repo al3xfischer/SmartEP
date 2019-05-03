@@ -1,0 +1,15 @@
+<div id="items">
+  <div *ngFor="let product of this.items">
+    <app-cart-item [product]="product"></app-cart-item>
+  </div>
+</div>
+<div class="fixed-bottom bg-light container-fluid">
+  <div class="row h-100 text-center">
+    <div class="col-md-6 col-lg-3 offset-1">
+      <h3>Total ({{count}} Item/s): {{total}}$</h3>
+    </div>
+    <div class="col-md-2 col-xs-12 text-center">
+      <input type="button" [disabled]="disableBuy" (click)="buyItems()" class="btn" value="Buy" />
+    </div>
+  </div>
+</div>

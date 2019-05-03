@@ -1,0 +1,46 @@
+<div class="container-fluid">
+  <table class="shadow-lg p-3 mg-3 bg-white">
+    <thead>
+      <th colspan="2">
+        <h1>
+          Sold Items
+        </h1>
+      </th>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="2" class="text-center">
+          <h4>
+            Revenue: {{revenue}}
+          </h4>
+          <span>
+            Tax: {{taxes}}
+          </span>
+          <h3>
+            Profit: {{profit}}
+          </h3>
+        </td>
+      </tr>
+      <tr *ngFor="let t of this.items">
+        <td class="pic-column">
+          <div id="pic-container">
+            <img [src]="t.path + '?bearer=' + token" />
+          </div>
+        </td>
+        <td>
+          <div id="text-container">
+            <h3>
+              {{t.title}}
+            </h3>
+            <h5>
+              Price: {{t.price}}
+            </h5>
+            <h6>
+              Tax: {{(t.price * 0.13) | roundToTwo}}
+            </h6>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
