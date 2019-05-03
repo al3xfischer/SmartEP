@@ -7,8 +7,16 @@ import jwt = require("jsonwebtoken");
 const uuid = require("uuid/v4");
 const secret = "Cm37oreTmbKYgLer8VUl";
 
+
+
 export default class Store {
   private db: Db;
+  private mysql      = require('mysql');
+  private  connection = this.mysql.createConnection({
+  host     : 'localhost',
+  user     : 'root',
+  password : 'smarteppw'
+  });
 
   private client: MongoClient;
 
@@ -16,6 +24,7 @@ export default class Store {
     this.getUserUuid.bind(this);
     this.getUserRole.bind(this);
     this.validateUserCredentials.bind(this);
+    this.connection.connect();
   }
 
   public async setupDb() {
