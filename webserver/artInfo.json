@@ -1,0 +1,188 @@
+[
+    {
+        "name": "ChristmasStar",
+        "imgSource": "http://localhost:4200/art/abstract-art-blur-1671431.jpg",
+        "description": "Candles lighting a start in the dark",
+        "price": 45
+    },
+    {
+        "name": "IceCristalls",
+        "imgSource": "http://localhost:4200/art/abstract-blur-bright-286198.jpg",
+        "description": "Ice cristalls in the light",
+        "price": 20
+    },
+    {
+        "name": "ChristmasPresents",
+        "imgSource": "http://localhost:4200/art/advent-background-bow-1303085.jpg",
+        "description": "Christmas parcels on wooden floor",
+        "price": 35
+    },
+    {
+        "name": "ChristmasParcel",
+        "imgSource": "http://localhost:4200/art/aerial-background-bow-1537164.jpg",
+        "description": "Christmas parcel on white floor",
+        "price": 20
+    },
+    {
+        "name": "SnowMan",
+        "imgSource": "http://localhost:4200/art/background-beautiful-bokeh-1028724.jpg",
+        "description": "Snow man with drum",
+        "price": 25
+    },
+    {
+        "name": "ChristmasCookies",
+        "imgSource": "http://localhost:4200/art/baked-blur-christmas-688010.jpg",        
+        "description": "Christmas cookies with icing in green and red",
+        "price": 30
+    },
+    {
+        "name": "GlassBall",
+        "imgSource": "http://localhost:4200/art/ball-ball-shaped-blur-302743.jpg",
+        "description": "Glass ball on snow",
+        "price": 15
+    },
+    {
+        "name": "ChristmasTreeBalls",
+        "imgSource": "http://localhost:4200/art/ball-blur-bokeh-306864.jpg",
+        "description": "Christmas tree made of glass balls ",
+        "price": 65
+    },
+    {
+        "name": "RedChristmasTreeBalls",
+        "imgSource": "http://localhost:4200/art/ball-blur-bokeh-717988.jpg",
+        "description": "Red glass balls on a Christmas tree ",
+        "price": 50
+    },
+    {
+        "name": "RedGlassBall",
+        "imgSource": "http://localhost:4200/art/ball-bokeh-bright-1622539.jpg",
+        "description": "One red glass ball",
+        "price": 35
+    },
+    {
+        "name": "PineCones",
+        "imgSource": "http://localhost:4200/art/berries-christmas-christmas-decoration-639123.jpg",
+        "description": "Pine cones and red berries",
+        "price": 20
+    },
+    {
+        "name": "ChristmasSnack",
+        "imgSource": "http://localhost:4200/art/beverage-blur-candy-260485.jpg",
+        "description": "Christmas cookies and marshmallows",
+        "price": 98
+    },
+    {
+        "name": "ThreePinkParcels",
+        "imgSource": "http://localhost:4200/art/blur-blurred-bokeh-1028723.jpg",
+        "description": "Parcels wrapped in pink paper",
+        "price": 55
+    },
+    {
+        "name": "GlassStar",
+        "imgSource": "http://localhost:4200/art/blur-close-up-cold-813872.jpg",
+        "description": "One lonely glass star",
+        "price": 20
+    },
+    {
+        "name": "ChristmasParcels",
+        "imgSource": "http://localhost:4200/art/bows-celebration-decorations-1303080.jpg",
+        "description": "Christmas parcels on wookd floor",
+        "price": 35
+    },
+    {
+        "name": "ShiningParcels",  
+        "imgSource": "http://localhost:4200/art/box-celebrate-celebration-1552633.jpg",
+        "description": "Christmas parcels wrapped in shinning paper",
+        "price": 15
+    },
+    {
+        "name": "ChristmasStuff",
+        "imgSource": "http://localhost:4200/art/box-celebration-christmas-1303094.jpg",
+        "description": "Christmas dekoration on wood floor",
+        "price": 25
+    },
+    {
+        "name": "ChristmasPresentsInWhite",
+        "imgSource": "http://localhost:4200/art/boxes-christmas-christmas-gifts-744970.jpg",
+        "description": "Christmas presents wrapped in white paper",
+        "price": 40
+    },
+    {
+        "name": "ChristmasDecoration",
+        "imgSource": "http://localhost:4200/art/branch-celebration-christmas-188971.jpg",
+        "description": "Christmas decoration on wooden floor",
+        "price": 25
+    },
+    {
+        "name": "GlassBallWithWhiteStar",
+        "imgSource": "http://localhost:4200/art/branch-celebration-christmas-257909.jpg",
+        "description": "Christmas tree ball with white star",
+        "price": 35
+    },
+    {
+        "name": "MerryChristmas",
+        "imgSource": "http://localhost:4200/art/branch-celebration-christmas-264995.jpg",
+        "description": "Christmas ornaments on a tree",
+        "price": 15
+    },
+    {
+        "name": "ChristmasTime",
+        "imgSource": "http://localhost:4200/art/bridge-cold-daytime-1559117.jpg",
+        "description": "Landscape in ice",
+        "price": 95
+    },
+    {
+        "name": "ChristmasTree",
+        "imgSource": "http://localhost:4200/art/bright-celebration-christmas-1669072.jpg",
+        "description": "Shinning Christmas tree",
+        "price": 85
+    },
+    {
+        "name": "GlassBalls",
+        "imgSource": "http://localhost:4200/art/celebration-christmas-christmas-balls-1645170.jpg",
+        "description": "Glass balls on a tree",
+        "price": 55
+    },
+    {
+        "name": "ChristmasInRed",
+        "imgSource": "http://localhost:4200/art/celebration-christmas-christmas-decoration-695971.jpg",
+        "description": "Christmas decoration in red",
+        "price": 20
+    },
+    {
+        "name": "SnowManOnTree",
+        "imgSource": "http://localhost:4200/art/celebration-christmas-christmas-decorations-704218.jpg",
+        "description": "Christmas ornaments on a tree",
+        "price": 70
+    },
+    {
+        "name": "ChristmasInGold",
+        "imgSource": "http://localhost:4200/art/christmas-balls-christmas-decorations-christmas-lights-1669093.jpg",
+        "description": "Christmas ornaments in gold",
+        "price": 90
+    },
+    {
+        "name": "RedGlassball",
+        "imgSource": "http://localhost:4200/art/christmas-christmas-ball-christmas-ornament-214238.jpg",
+        "description": "Red glass ball on wooden floor",
+        "price": 35
+    },
+    {
+        "name": "Rendeer",
+        "imgSource": "http://localhost:4200/art/christmas-christmas-decor-christmas-ornament-1619666.jpg",
+        "description": "Rendeer and Christmas decoration",
+        "price": 85
+    },
+    {
+        "name": "GlassBallInRedAndWhite",
+        "imgSource": "http://localhost:4200/art/christmas-christmas-tree-christmas-wallpaper-17795.jpg",
+        "description": "Christmas tree glass ball in red and white",
+        "price": 75
+    },
+    {
+        "name": "PineCones",
+        "imgSource": "http://localhost:4200/art/christmas-conifer-cone-decoration-639110.jpg",
+        "description": "Pine cones and white stars on white floor",
+        "price": 20
+    }
+]
