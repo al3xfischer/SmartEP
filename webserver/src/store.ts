@@ -1,157 +1,105 @@
-import { Db, MongoClient } from "mongodb";
-import ConnectToDb from "./mongo";
-import { Item } from "./models";
 import logger from "./logger";
 import jwt = require("jsonwebtoken");
-import * as mysql from "mysql";
+import { createConnection, Connection, Repository } from "typeorm";
+import {User} from "./entity/User";
+import {Role} from "./entity/Role";
 
 const uuid = require("uuid/v4");
 const secret = "Cm37oreTmbKYgLer8VUl";
 
-
-
 export default class Store {
-  private db: Db;
-  private  connection: mysql.Connection;
-  // private client: MongoClient;
+  private connection: Connection;
 
   constructor() {
-    this.connection = mysql.createConnection({
-      host     : 'localhost',
-      user     : 'root',
-      password : 'smarteppw',
-      port     : 3306,
-      database : 'smartep',
-    });
-    this.getUserUuid.bind(this);
     this.getUserRole.bind(this);
+    this.connectDb.bind(this);
+    this.getUserUuid.bind(this);
     this.validateUserCredentials.bind(this);
-    this.connection.connect();
+  }
 
-    this.connection.query('select * from users',(err,results,fields) => {
-      if (err) throw err;
-      console.log(results);
+  public async connectDb() : Promise<Boolean>{
+    this.connection = await createConnection({
+      type: "mysql",
+      host: "localhost",
+      port: 3306,
+      username: "root",
+      password: "smarteppw",
+      database: "smartep",
+      entities: [
+        __dirname + "/entity/*.ts"
+      ],
+      logging: false
     });
+
+    if(this.connection){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 
-  public async setupDb() {
-    // this.client = await ConnectToDb("webshop");
-    // this.db = this.client.db();
-    logger.info("db ready");
-  }
+  public async getUserUuid(userName: String): Promise<String> {
 
-  public getUserUuid(userName: string): string {
     if (!userName) {
       return null;
     }
 
-    const identifier: string = uuid();
-    this.db
-      .collection("users")
-      .updateOne({ name: userName }, { $set: { uuid: identifier } })
-      .catch(err => logger.info(err));
+    const identifier: String = uuid();
+    let repo = this.connection.getRepository(User);
+    let user = await repo.findOne({ name: userName});
+    user.uuid = identifier;
+    repo.save(user);
 
     return identifier;
   }
 
-  public async getUserRole(userName: string): Promise<string> {
+  public async getUserRole(userName: String): Promise<String> {
     if (!userName) {
       return null;
     }
 
-    let user = await this.db.collection("users").findOne({ name: userName });
+    let userRepo = this.connection.getRepository(User);
+    let roleRepo = this.connection.getRepository(Role);
+    let user: User = await userRepo.findOne({name: userName});
 
-    if (user) {
-      return user.role;
-    } else {
+    if(user){
+      let role = await roleRepo.findOne(user.roleId);
+      return role ? role.name : null;
+    }
+    else{
       return null;
     }
   }
 
   public async validateUserCredentials(
-    userName: string,
-    hash: string
-  ): Promise<boolean> {
+    userName: String,
+    hash: String
+  ): Promise<Boolean> {
     if (!userName || !hash) {
       return false;
     }
-    let user = await this.db
-      .collection("users")
-      .findOne({ name: userName, password: hash });
+    
+    let repo: Repository<User> = this.connection.getRepository(User);
+    let user: User = await repo.findOne({ name: userName});
 
-    if (user) {
-      return true;
-    } else {
-      return false;
-    }
+    return user.keyword == hash;
   }
 
-  public async getPictures(): Promise<Item[]> {
-    const data = (await this.db
-      .collection("pictures")
-      .aggregate([
-        { $match: { sold: false } },
-        { $sort: { _id: 1 } },
-        { $project: { _id: 0, title: 1, description: 1, price: 1, path: 1 } }
-      ])
-      .toArray()) as Item[];
+  public async getRole(token: string): Promise<string> {
+    let payload: any = jwt.decode(token);
+    let repo: Repository<User> = this.connection.getRepository(User);
+    let user: User = await repo.findOne({uuid: payload.id}); 
 
-    return data;
+    return user ? payload.role : null;
   }
 
-  public async getSoldPictures(): Promise<Item[]> {
-    const data = (await this.db
-      .collection("pictures")
-      .aggregate([
-        { $match: { sold: true } },
-        { $project: { _id: 0, title: 1, description: 1, price: 1, path: 1 } }
-      ])
-      .toArray()) as Item[];
-
-    return data;
+  public createToken(role: String,uuid: String) {
+    return jwt.sign(
+      {id: uuid,role: role},
+      secret,
+      { expiresIn: "1d"}
+    );
   }
 
-  public async sellItems(products: Item[]): Promise<Item[]> {
-    let notSold: Item[] = [];
-
-    for (let product of products) {
-      let result = await this.db
-        .collection("pictures")
-        .findOneAndUpdate(
-          { title: product.title, sold: false },
-          { $set: { sold: true } }
-        );
-
-      if (!result.value) {
-        notSold.push(product);
-      }
-    }
-
-    return notSold;
-  }
-
-  public verifyToken(token: string): boolean {
-    try {
-      token.replace('""', "");
-      jwt.verify(token, secret);
-      return true;
-    } catch (ex) {
-      logger.info(ex);
-      return false;
-    }
-  }
-
-  public verifyAdminToken(token: string) {
-    try {
-      token.replace('""', "");
-      let decoded: any = jwt.verify(token, secret);
-      //Decoded === not modified and therefore not db check
-      if (decoded.role === "admin") {
-        return true;
-      }
-    } catch (ex) {
-      logger.info(ex);
-      return false;
-    }
-  }
 }
