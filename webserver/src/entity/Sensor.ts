@@ -5,11 +5,11 @@ import {Entity, Column, PrimaryGeneratedColumn} from 'typeorm';
 export class Sensor {
     
     @PrimaryGeneratedColumn({name: "Id"})
-    public id: Number;
+    public id:  number;
 
     @Column({name: "Name"})
-    public name: String;
+    public name: string;
 
     @Column({name: "Value"})
-    public value: Date;
+    public value: string;
 }

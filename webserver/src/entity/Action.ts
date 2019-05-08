@@ -5,14 +5,14 @@ import {Entity, Column, PrimaryGeneratedColumn} from 'typeorm';
 export class Action {
     
     @PrimaryGeneratedColumn({name: "Id"})
-    public id: Number;
+    public id:  number;
 
     @Column({name: "Action"})
-    public action: String;
+    public action: string;
 
     @Column({name: "Stamp"})
     public stamp: Date;
 
     @Column({name: "UserId"})
-    public userId: Number;
+    public userId:  number;
 }

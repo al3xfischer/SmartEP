@@ -18,6 +18,7 @@ export class PictureService {
   }
 
   public getPictures() {
+    console.log("get pics");
     return new Promise<Item[]>((resolve, reject) => {
       if (this._pictures.length > 0) {
         resolve(this._pictures.slice(0, 20));

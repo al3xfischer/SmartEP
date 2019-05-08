@@ -26,7 +26,8 @@ export class AuthService {
     });
     if (response.status === 200) {
       const data = await response.json();
-      localStorage.setItem('token', data.token);
+      console.log(data);
+      localStorage.setItem('token', data);
       this.loggedIn.emit(true);
       return true;
     } else {
@@ -43,6 +44,7 @@ export class AuthService {
     const token: string = localStorage.getItem('token');
 
     if (token) {
+      console.log(token);
       return !this.jwtHelper.isTokenExpired(token);
     } else {
       return false;

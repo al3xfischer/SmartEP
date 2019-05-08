@@ -5,11 +5,11 @@ import {Entity, Column, PrimaryGeneratedColumn} from 'typeorm';
 export class Actor {
     
     @PrimaryGeneratedColumn({name: "Id"})
-    public id: Number;
+    public id:  number;
 
-    @Column({name: "Stamp"})
-    public stamp: Date;
+    @Column({name: "Name"})
+    public name: string;
 
     @Column({name: "Value"})
-    public value: String;
+    public value: string;
 }
