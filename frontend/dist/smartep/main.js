@@ -1584,7 +1584,7 @@ var PictureService = /** @class */ (function () {
             if (_this._pictures.length > 0) {
                 resolve(_this._pictures.slice(0, 20));
             }
-            fetch(location.origin + '/api/products', {
+            fetch(location.origin + '/api/devices', {
                 headers: {
                     Accept: 'application/json',
                     'Content-Type': 'application/json',
@@ -1593,6 +1593,7 @@ var PictureService = /** @class */ (function () {
             })
                 .then(function (res) {
                 if (res.status === 200) {
+                    console.log(res);
                     return res.json();
                 }
                 else {
@@ -1607,7 +1608,7 @@ var PictureService = /** @class */ (function () {
                     _this.createDict(data);
                 }
             })
-                .catch(function (err) { return reject(err); });
+                .catch(function (err) { return console.log(err); });
         });
     };
     PictureService.prototype.getBatch = function () {

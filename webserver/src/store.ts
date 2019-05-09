@@ -20,6 +20,11 @@ export interface IHashResult {
   salt: string
 }
 
+export interface ITokenContent {
+  uuid: string,
+  role: string
+}
+
 export default class Store {
   
   /**
@@ -276,6 +281,29 @@ export default class Store {
     let user: User = await this.userRepo.findOne({uuid: payload.id}); 
 
     return user ? payload.role : null;
+  }
+
+  /**
+   * Decodes the given token.
+   *
+   * @param {string} token
+   * @returns {ITokenContent}
+   * @memberof Store
+   */
+  public decode(token: string ) : ITokenContent {
+    let payload : any = jwt.decode(token);
+    return payload ? { role: payload.role, uuid: payload.id  } : null;
+  }
+
+  /**
+   * Check whether a given uuid exists.
+   *
+   * @param {string} uuid
+   * @returns {Promise<boolean>}
+   * @memberof Store
+   */
+  public async exists(uuid: string) : Promise<boolean> {
+    return (await this.userRepo.findOne({uuid: uuid})) ? true : false;
   }
 
   /**

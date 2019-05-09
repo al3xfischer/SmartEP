@@ -24,7 +24,7 @@ export class PictureService {
         resolve(this._pictures.slice(0, 20));
       }
 
-      fetch(location.origin + '/api/products', {
+      fetch(location.origin + '/api/devices', {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
@@ -33,6 +33,7 @@ export class PictureService {
       })
         .then(res => {
           if (res.status === 200) {
+            console.log(res);
             return res.json();
           } else {
             return null;
@@ -46,7 +47,7 @@ export class PictureService {
             this.createDict(data);
           }
         })
-        .catch(err => reject(err));
+        .catch(err => console.log(err));
     });
   }
 
