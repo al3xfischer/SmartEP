@@ -14,7 +14,6 @@ export class AuthService {
     if (this.jwtHelper.tokenGetter() !== null) {
       return Promise.resolve(false);
     }
-    console.log(`${location.origin}/api/login`);
     const response = await fetch(`${location.origin}/api/login`, {
       method: 'POST',
       headers: {
@@ -44,7 +43,6 @@ export class AuthService {
     const token: string = localStorage.getItem('token');
 
     if (token) {
-      console.log(token);
       return !this.jwtHelper.isTokenExpired(token);
     } else {
       return false;

@@ -1395,7 +1395,6 @@ var AuthService = /** @class */ (function () {
                         if (this.jwtHelper.tokenGetter() !== null) {
                             return [2 /*return*/, Promise.resolve(false)];
                         }
-                        console.log(location.origin + "/api/login");
                         return [4 /*yield*/, fetch(location.origin + "/api/login", {
                                 method: 'POST',
                                 headers: {
@@ -1427,7 +1426,6 @@ var AuthService = /** @class */ (function () {
     AuthService.prototype.isLoggedIn = function () {
         var token = localStorage.getItem('token');
         if (token) {
-            console.log(token);
             return !this.jwtHelper.isTokenExpired(token);
         }
         else {

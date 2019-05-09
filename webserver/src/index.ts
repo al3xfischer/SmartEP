@@ -30,7 +30,7 @@ export class Server {
     this.app = express();
     this.app.use(bodyParser.json());
     // Middleware
-    this.app.use(this.verifyAccess.bind(this));
+    // this.app.use(this.verifyAccess.bind(this));
     //Publicly accessible
     this.app.post("/api/login", this.loginRoute.bind(this));
     this.app.get("*",this.webContent.bind(this));
@@ -56,6 +56,7 @@ export class Server {
 
     // Source: https://blog.cloudboost.io/run-your-angular-app-on-nodejs-c89f1e99ddd3
     private webContent(req: express.Request, res: express.Response) {
+      console.log(req);
       if (
         allowedExt.filter((ext: string) => req.url.indexOf(ext) > 0).length > 0
       ) {
