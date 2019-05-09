@@ -29,10 +29,9 @@ export class Server {
     //Setup
     this.app = express();
     this.app.use(bodyParser.json());
-    //Middleware
-    this.app.all("/images/*", this.verifyAccess);
+    // Middleware
+    this.app.use(this.verifyAccess.bind(this));
     //Publicly accessible
-    this.app.use("/api/images", express.static("images"));
     this.app.post("/api/login", this.loginRoute.bind(this));
     this.app.get("*",this.webContent.bind(this));
     this.verifyAccess.bind(this);
@@ -47,25 +46,25 @@ export class Server {
   // TODO: löschen
   private async test(): Promise<void> {
     let result = await this.userStore.connectDb();
-    // let added = await this.userStore.createUser("admin","admin","admin");
+    // let added = await this.userStore.createUser("admin","admin");
+    // let added1 = await this.userStore.createUser("peter","peter");
+    // let added2 = await this.userStore.createUser("kevin","kevin");
+    // let added3 = await this.userStore.createUser("alex","alex");
     // console.log(`added: ${added}`);
     console.log(`Connected:  ${result}`);
-    let user : User = await this.userStore.userRepo.findOne({name: "admin"});
-    console.log(user);
   }
 
     // Source: https://blog.cloudboost.io/run-your-angular-app-on-nodejs-c89f1e99ddd3
     private webContent(req: express.Request, res: express.Response) {
-      console.log("gotit;");
       if (
         allowedExt.filter((ext: string) => req.url.indexOf(ext) > 0).length > 0
       ) {
         res.sendFile(
-          path.resolve(`../frontend/dist/picshop/${req.url}`),
+          path.resolve(`../frontend/dist/smartep/${req.url}`),
         );
       } else {
         res.sendFile(
-          path.resolve("../frontend/dist/picshop/index.html"),
+          path.resolve("../frontend/dist/smartep/index.html"),
         );
       }
     }
@@ -104,8 +103,6 @@ export class Server {
       let uuid = await this.userStore.getUserUuid(req.body.user);
       let userRole = await this.userStore.getUserRole(req.body.user);
       let token = await this.userStore.createToken(userRole,uuid);
-      console.log("done login");
-      console.log(token);
       res.status(200).send(JSON.stringify(token));
     } else {
       res.status(401).send();

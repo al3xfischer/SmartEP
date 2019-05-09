@@ -52,10 +52,10 @@ class Server {
     webContent(req, res) {
         console.log("gotit;");
         if (allowedExt.filter((ext) => req.url.indexOf(ext) > 0).length > 0) {
-            res.sendFile(path.resolve(`../frontend/dist/picshop/${req.url}`));
+            res.sendFile(path.resolve(`../frontend/dist/smartep/${req.url}`));
         }
         else {
-            res.sendFile(path.resolve("../frontend/dist/picshop/index.html"));
+            res.sendFile(path.resolve("../frontend/dist/smartep/index.html"));
         }
     }
     verifyAccess(req, res, next) {
