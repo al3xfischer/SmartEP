@@ -27,11 +27,13 @@ export class Server {
 
   constructor(private userStore: Store) {
     //Setup
+    this.userStore.connectDb();
     this.app = express();
     this.app.use(bodyParser.json());
     //Publicly accessible
     this.app.post("/api/login", this.loginRoute.bind(this));
     this.app.get("/api/devices", this.getDevices.bind(this));
+    this.app.get("/api/actions", this.getActions.bind(this));
     this.app.get("*",this.webContent.bind(this));
     // this.verifyAccess.bind(this);
     //Logger
@@ -39,7 +41,7 @@ export class Server {
     //Port
     this.app.listen(4000);
     this.test.bind(this);
-    this.test();
+    // this.test();
   }
 
   // TODO: löschen
@@ -68,38 +70,25 @@ export class Server {
       }
     }
 
-  private verifyAccess(
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction
-  ) {
-    try {
-      if (
-        req.headers["authorization"] && this.userStore.getRole(JSON.parse(req.headers["authorization"]))
-      ) {
-        next();
-      } else if (
-        req.query.bearer &&
-        this.userStore.getRole(JSON.parse(req.query.bearer))
-      ) {
-        next();
-      } else {
-        res.status(401).send();
-      }
-    } catch (err) {
-      res.status(401).send(err);
+  public async getDevices(req: express.Request, res: express.Response) : Promise<void> {
+    let access = await this.isAuthorized(req);
+    if(access == 200) {
+      let devices = await this.userStore.getDevices();
+      res.status(access).send(devices);
+    }
+    else{
+      res.status(access).send();
     }
   }
 
-  public async getDevices(req: express.Request, res: express.Response) : Promise<void> {
-    console.log("get devs");
-    if(this.isAuthorized(req)) {
-      console.log("is allowd");
-      let devices = await this.userStore.getDevices();
-      res.status(200).send(devices);
+  public async getActions(req: express.Request, res: express.Response) : Promise<void> {
+    let access = await this.isAdmin(req);
+    if(access == 200) {
+      let actions = await this.userStore.getActions();
+      res.status(access).send(actions);
     }
     else{
-      res.status(401).send();
+      res.status(access).send();
     }
   }
 
@@ -120,23 +109,24 @@ export class Server {
     }
   }
 
-  private isAuthorized(request: express.Request): Promise<boolean> {
+  private async isAuthorized(request: express.Request): Promise<number> {
     let token = request.headers.authorization ? request.headers.authorization : null;
-    if (! token ) return new Promise((resolve,_) => {resolve(true)});
+    if (! token ) return new Promise((resolve,_) => {resolve(401)});
 
     let tokenContent : ITokenContent = this.userStore.decode(token);
+    let exists: boolean = await this.userStore.exists(tokenContent.uuid);
 
-    return this.userStore.exists(tokenContent.uuid);
+    return exists ? 200 : 401 ;
   }
 
-  private async isAdmin(request: express.Request): Promise<boolean> {
+  private async isAdmin(request: express.Request): Promise<number> {
     let token = request.headers.authorization ? request.headers.authorization : null;
-    if (! token ) return new Promise((resolve,_) => {resolve(true)});
+    if (! token ) return new Promise((resolve,_) => {resolve(401)});
 
     let tokenContent : ITokenContent = this.userStore.decode(token);
     let exists : boolean = await this.userStore.exists(tokenContent.uuid);
 
-    return exists && tokenContent.role == "admin";
+    return exists && tokenContent.role == "admin" ? 200 : 401;
   }
 }
 

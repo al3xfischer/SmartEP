@@ -7,7 +7,6 @@ import {Role} from "./entity/Role";
 import { Device } from "./entity/Device";
 import { Action } from "./entity/Action";
 import { Log } from "./entity/Log";
-import { userInfo } from "os";
 
 const uuid = require("uuid/v4");
 const secret = "Cm37oreTmbKYgLer8VUl";
@@ -20,6 +19,12 @@ export interface IHashResult {
   salt: string
 }
 
+/**
+ * The information stored in an JWT.
+ *
+ * @export
+ * @interface ITokenContent
+ */
 export interface ITokenContent {
   uuid: string,
   role: string
@@ -248,7 +253,7 @@ export default class Store {
   public async addAction(operation: string, userId: number) : Promise<boolean> {
     let action = new Action();
 
-    action.action = operation;
+    action.action = this.escape(operation);
     action.stamp = new Date();
     action.userId = userId;
     let result = this.handleError(this.actionRepo.insert(action));
@@ -361,5 +366,17 @@ export default class Store {
         resolve({ hash, salt});
       });
     }); 
+  }
+
+  /**
+   * Replace alle the special characters with HTML entities.
+   *
+   * @private
+   * @param {string} input
+   * @returns {string}
+   * @memberof Store
+   */
+  private escape(input: string) : string {
+    return input.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#x27;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\//g, '&#x2F;').replace(/\\/g, '&#x5C;').replace(/`/g, '&#96;');
   }
 }
