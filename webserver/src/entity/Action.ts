@@ -7,7 +7,7 @@ export class Action {
     @PrimaryGeneratedColumn({name: "Id"})
     public id:  number;
 
-    @Column({name: "Action"})
+    @Column({name: "Action"},)
     public action: string;
 
     @Column({name: "Stamp"})

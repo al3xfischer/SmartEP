@@ -10,6 +10,25 @@ export class AuthService {
 
   public loggedIn: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  public async register(name: string, phrase: string): Promise<boolean> {
+    const response = await fetch(`${location.origin}/api/register`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': this.getToken()
+      },
+      body: JSON.stringify({ name: name, keyword: phrase })
+    });
+
+    console.log(response)
+
+    if(response.status === 200){
+      return true;
+    }
+    else return false;
+  }
+
   public async login(name: string, word: string): Promise<boolean> {
     if (this.jwtHelper.tokenGetter() !== null) {
       return Promise.resolve(false);

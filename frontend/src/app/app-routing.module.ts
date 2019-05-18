@@ -1,30 +1,20 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PicturesComponent } from './pictures/pictures.component';
-import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { LoginComponent } from './login/login.component';
-import { PicdetailsComponent } from './picdetails/picdetails.component';
 import { AdminComponent } from './admin/admin.component';
 import { AuthguardService as AuthGuard } from './services/authguard.service';
 import { RoleguardService as RoleGuard } from './services/roleguard.service';
+import { RegisterComponent } from './register/register.component';
+import { DevicesComponent } from './devices/devices.component';
 
 const routes: Routes = [
   {
-    path: 'pictures',
-    component: PicturesComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'shoppingcart',
-    component: ShoppingCartComponent,
+    path: 'devices',
+    component: DevicesComponent,
     canActivate: [AuthGuard]
   },
   { path: 'login', component: LoginComponent },
-  {
-    path: 'details/:hash',
-    component: PicdetailsComponent,
-    canActivate: [AuthGuard]
-  },
+  { path: 'register', component: RegisterComponent },
   {
     path: 'admin',
     component: AdminComponent,
@@ -35,7 +25,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    component: PicturesComponent,
+    component: DevicesComponent,
     canActivate: [AuthGuard]
   }
 ];

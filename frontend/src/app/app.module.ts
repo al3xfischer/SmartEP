@@ -5,21 +5,17 @@ import {
 } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-
+import { MatTableModule, MatSortModule } from '@angular/material';
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { NavbarComponent } from "./navbar/navbar.component";
-import { ShoppingCartComponent } from "./shopping-cart/shopping-cart.component";
-import { PicturesComponent } from "./pictures/pictures.component";
-import { CardComponent } from "./card/card.component";
-import { CartItemComponent } from "./cart-item/cart-item.component";
 import { LoginComponent } from "./login/login.component";
-import { PicdetailsComponent } from "./picdetails/picdetails.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AdminComponent } from "./admin/admin.component";
-import { RoundToTwoPipe } from "./pipes/round-to-two.pipe";
-import { JwtModule, JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
+import { JwtModule, JwtHelperService } from '@auth0/angular-jwt';
 import { AuthService } from "./services/auth.service";
+import { RegisterComponent } from "./register/register.component";
+import { DevicesComponent } from './devices/devices.component';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
@@ -35,16 +31,14 @@ export function getToken() {
   declarations: [
     AppComponent,
     NavbarComponent,
-    ShoppingCartComponent,
-    PicturesComponent,
-    CardComponent,
-    CartItemComponent,
     LoginComponent,
-    PicdetailsComponent,
     AdminComponent,
-    RoundToTwoPipe
+    RegisterComponent,
+    DevicesComponent,
   ],
   imports: [
+    MatSortModule,
+    MatTableModule,
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
@@ -64,6 +58,6 @@ export function getToken() {
     }
   ],
   bootstrap: [AppComponent],
-  exports: [RoundToTwoPipe]
+  exports: []
 })
 export class AppModule {}

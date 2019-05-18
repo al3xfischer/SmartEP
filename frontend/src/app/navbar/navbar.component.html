@@ -34,31 +34,4 @@
       </li>
     </ul>
   </div>
-  <div>
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <div *ngIf="!showAmount; else biggerZero">
-          <a class="nav-link" [routerLink]="['/shoppingcart']">
-            <i class="material-icons">
-              shopping_cart
-            </i>
-          </a>
-        </div>
-        <ng-template #biggerZero>
-          <a class="nav-link" [routerLink]="['/shoppingcart']">
-            <span>
-              <span id="amountSpan">
-                <i id="amount">
-                  {{amount}}
-                </i>
-              </span>
-              <i class="material-icons">
-                shopping_cart
-              </i>
-            </span>
-          </a>
-        </ng-template>
-      </li>
-    </ul>
-  </div>
 </nav>

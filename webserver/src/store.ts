@@ -7,6 +7,7 @@ import {Role} from "./entity/Role";
 import { Device } from "./entity/Device";
 import { Action } from "./entity/Action";
 import { Log } from "./entity/Log";
+import { DeviceSubscriber } from "./subscriber/device";
 
 const uuid = require("uuid/v4");
 const secret = "Cm37oreTmbKYgLer8VUl";
@@ -119,7 +120,8 @@ export default class Store {
       entities: [
         __dirname + "/entity/*.ts"
       ],
-      logging: false
+      logging: false,
+      subscribers : [DeviceSubscriber]
     });
 
     if(!!this.connection){
@@ -217,7 +219,7 @@ export default class Store {
     user.uuid = uuid();
 
     let result: InsertResult = await this.handleError(this.userRepo.insert(user));
-
+    console.log(result);
     // return whether the insert was succesfull;
     return !!result;
   }
@@ -250,24 +252,41 @@ export default class Store {
    * @returns {Promise<void>}
    * @memberof Store
    */
-  public async addAction(operation: string, userId: number) : Promise<boolean> {
+  public async addAction(operation: string, uuid: string) : Promise<boolean> {
     let action = new Action();
+    let user : User = await this.userRepo.findOne({ uuid: uuid});
+    if(! user) return false;
 
     action.action = this.escape(operation);
     action.stamp = new Date();
-    action.userId = userId;
-    let result = this.handleError(this.actionRepo.insert(action));
+    action.userId = user.id;
+    let result = this.handleError(this.actionRepo.save(action));
     return !!result;
   }
 
   public async logMessage(message: string, userId?: number) : Promise<boolean> {
     let log = new Log();
-
     log.message = message;
     log.stamp = new Date();
     log.userId = userId;
     let result = await this.handleError(this.logRepo.insert(log));
     return !!result;
+  }
+
+  /**
+   * Updates the given device.
+   *
+   * @param {Device} device
+   * @returns {Promise<boolean>}
+   * @memberof Store
+   */
+  public async updateDevice(device: Device,uuid: string) : Promise<boolean> {
+    let user = await this.userRepo.findOne({uuid: uuid});
+    device.name = this.escape(device.name);
+    device.actor.name = this.escape(device.actor.name);
+    device.sensor.name = this.escape(device.sensor.name);
+    let result : Device = await this.handleError(this.deviceRepo.save(device,{data: user}));
+    return result ? true : false;
   }
 
   /**
@@ -309,6 +328,20 @@ export default class Store {
    */
   public async exists(uuid: string) : Promise<boolean> {
     return (await this.userRepo.findOne({uuid: uuid})) ? true : false;
+  }
+
+  /**
+   * Create the action content.
+   *
+   * @param {string} operation like update | deleted | ...
+   * @param {*} data
+   * @memberof Store
+   */
+  public createActionContent(operation: string, data: any) : string {
+    let result : any = {};
+    result.operation = operation;
+    Object.assign(result,data);
+    return JSON.stringify(result);
   }
 
   /**
@@ -377,6 +410,7 @@ export default class Store {
    * @memberof Store
    */
   private escape(input: string) : string {
+    if (! input) return null;
     return input.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#x27;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\//g, '&#x2F;').replace(/\\/g, '&#x5C;').replace(/`/g, '&#96;');
   }
 }

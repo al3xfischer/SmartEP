@@ -1,4 +1,4 @@
-import {Entity, Column, PrimaryGeneratedColumn,JoinColumn, ManyToOne} from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn,JoinColumn, ManyToOne, BeforeUpdate, UpdateEvent} from 'typeorm';
 import { Actor } from './Actor';
 import { Sensor } from './Sensor';
 
@@ -9,7 +9,7 @@ export class Device {
     @PrimaryGeneratedColumn({name: "Id"})
     public id:  number;
 
-    @Column({name: "Sensorid"})
+    @Column({name: "SensorId"})
     public sensorId:  number;
 
     @Column({name: "ActorId"})

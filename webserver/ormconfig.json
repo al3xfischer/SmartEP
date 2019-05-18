@@ -5,7 +5,6 @@
     "username": "root",
     "password": "smarteppw",
     "database": "smartep",
-    "synchronize": true,
     "logging": false,
     "entities": [
        "src/entity/**/*.ts"

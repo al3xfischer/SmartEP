@@ -30,7 +30,7 @@ DROP TABLE IF EXISTS `Action`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Action` (
   `Id` int(20) NOT NULL AUTO_INCREMENT,
-  `Action` varchar(500) NOT NULL,
+  `Action` text(2000) NOT NULL,
   `Stamp` datetime NOT NULL,
   `UserId` int(20) NOT NULL,
   PRIMARY KEY (`Id`),
