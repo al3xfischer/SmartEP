@@ -1,3 +1,4 @@
+import { User } from "./User";
 
 export class Action {
     
@@ -8,4 +9,6 @@ export class Action {
     public stamp: Date;
 
     public userId:  number;
+
+    public user: User;
 }

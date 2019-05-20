@@ -19,6 +19,7 @@
       <a class="dropdown-item nav-link bg-dark text-light" *ngIf="showLogin" [routerLink]="['/login']">Login</a>
       <a class="dropdown-item nav-link bg-dark text-light" *ngIf="!showLogin" (click)="logout()" [routerLink]="['/login']">Logout</a>
       <a class="dropdown-item nav-link bg-dark text-light" *ngIf="showAdmin" [routerLink]="['/admin']">Admin</a>
+      <a class="dropdown-item nav-link bg-dark text-light" *ngIf="showAdmin" [routerLink]="['/history']">History</a>
     </div>
   </div>
   <div class="d-none d-lg-block">

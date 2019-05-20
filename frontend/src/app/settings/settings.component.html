@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    <div class="col align-self-center">
+      <table mat-table [dataSource]="devices" matSort class="mat-elevation-z8 center">
+        
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+          <td mat-cell *matCellDef="let device">
+            <input matInput [(ngModel)]="device.name">
+          </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="actual">
+          <th mat-header-cell *matHeaderCellDef > Actual value </th>
+          <td mat-cell *matCellDef="let device"> {{device.sensor.value}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="set">
+          <th mat-header-cell *matHeaderCellDef > Nominal value </th>
+          <td mat-cell *matCellDef="let device"> {{device.actor.value}} </td>
+        </ng-container>
+        
+        <tr mat-header-row *matHeaderRowDef="columnNames"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnNames;"></tr>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col mt-2 mb-1">
+      <div class="row float-right" >
+        <input tpye="button" readonly="true" value="Save" class="btn btn-primary mr-3" (click)="save()"/>
+      </div>
+        <input tpye="button" readonly="true" value="{{msg}}" class="btn w-50 disabled" 
+         [ngClass]="{
+           'btn-outline-danger': !success && msg,
+           'btn-outline-success': success && msg,
+           'collapse':!msg
+         }"
+        />
+    </div>
+  </div>
+</div>

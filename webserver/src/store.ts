@@ -8,6 +8,7 @@ import { Device } from "./entity/Device";
 import { Action } from "./entity/Action";
 import { Log } from "./entity/Log";
 import { DeviceSubscriber } from "./subscriber/device";
+import { resolve } from "dns";
 
 const uuid = require("uuid/v4");
 const secret = "Cm37oreTmbKYgLer8VUl";
@@ -152,6 +153,7 @@ export default class Store {
     const identifier: string = uuid();
     let user = await this.userRepo.findOne({name: userName});
     user.uuid = identifier;
+    console.log(user);
     this.userRepo.save(user);
     return identifier;
   }
@@ -241,7 +243,14 @@ export default class Store {
    * @memberof Store
    */
   public async getActions() : Promise<Action[]> {
-    return this.actionRepo.find();
+     let actions = await this.actionRepo.find();
+
+     for(let action of actions) {
+       action.user = this.cleanUser(action.user);
+     }
+
+     console.log(actions);
+     return actions;
   }
 
   /**
@@ -257,7 +266,7 @@ export default class Store {
     let user : User = await this.userRepo.findOne({ uuid: uuid});
     if(! user) return false;
 
-    action.action = this.escape(operation);
+    action.action = operation
     action.stamp = new Date();
     action.userId = user.id;
     let result = this.handleError(this.actionRepo.save(action));
@@ -282,11 +291,27 @@ export default class Store {
    */
   public async updateDevice(device: Device,uuid: string) : Promise<boolean> {
     let user = await this.userRepo.findOne({uuid: uuid});
-    device.name = this.escape(device.name);
-    device.actor.name = this.escape(device.actor.name);
-    device.sensor.name = this.escape(device.sensor.name);
     let result : Device = await this.handleError(this.deviceRepo.save(device,{data: user}));
     return result ? true : false;
+  }
+
+  /**
+   * Updates the given devices.
+   *
+   * @param {Device[]} devices
+   * @param {string} uuid
+   * @returns {Promise<boolean>}
+   * @memberof Store
+   */
+  public async updateDevices(devices: Device[],uuid: string) : Promise<boolean> {
+    let result = true;
+
+    for(let device of devices){
+      let tmpResult = await this.updateDevice(device,uuid);
+      result = result && tmpResult;
+    }
+
+    return result;
   }
 
   /**
@@ -401,16 +426,15 @@ export default class Store {
     }); 
   }
 
-  /**
-   * Replace alle the special characters with HTML entities.
-   *
-   * @private
-   * @param {string} input
-   * @returns {string}
-   * @memberof Store
-   */
-  private escape(input: string) : string {
-    if (! input) return null;
-    return input.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#x27;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\//g, '&#x2F;').replace(/\\/g, '&#x5C;').replace(/`/g, '&#96;');
+  private cleanUser(user: User) : User{
+    let data = user as any;
+    for(let key of Object.keys(data))
+    {
+      if(key !== "name" && data[key]){
+        delete data[key];
+      }
+    }
+
+    return data;
   }
 }

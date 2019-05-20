@@ -16,7 +16,7 @@
             <label><b>Password</b></label>
           </div>
           <div class="row justify-content-center">
-            <input type="password" [(ngModel)]='keyword' name="pw" placeholder="Enter Passowrd" required maxlength="100" />
+            <input type="password" [(ngModel)]='keyword' autocomplete="on" name="pw" placeholder="Enter Passowrd" required maxlength="100" />
           </div>
           <div class="row justify-content-center">
             <input type="submit" (click)="login()" value="Login" class="btn bg-success" />

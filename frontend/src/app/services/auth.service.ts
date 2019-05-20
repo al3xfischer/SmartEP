@@ -40,7 +40,7 @@ export class AuthService {
         'Content-Type': 'application/json',
         'Authorization': this.getToken()
       },
-      body: JSON.stringify({ user: name, pw: word })
+      body: JSON.stringify({ name: name, keyword: word })
     });
     if (response.status === 200) {
       const data = await response.json();

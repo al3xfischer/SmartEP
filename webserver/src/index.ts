@@ -31,7 +31,7 @@ export class Server {
     //Publicly accessible routes
     this.app.post("/api/login", this.loginUser.bind(this));
     this.app.post("/api/register",this.registerUser.bind(this));
-    this.app.put("/api/device",this.updateDevice.bind(this));
+    this.app.put("/api/update/devices",this.updateDevices.bind(this));
     this.app.get("/api/devices", this.getDevices.bind(this));
     this.app.get("/api/actions", this.getActions.bind(this));
     this.app.get("*",this.webContent.bind(this));
@@ -72,6 +72,7 @@ export class Server {
 
   public async getDevices(req: express.Request, res: express.Response) : Promise<void> {
     let uuid : string = await this.isAuthorized(req);
+    console.log(uuid);
     if(uuid) {
       let devices = await this.store.getDevices();
       res.status(200).send(devices);
@@ -92,18 +93,18 @@ export class Server {
     }
   }
 
-  public async updateDevice(req: express.Request, res: express.Response) : Promise<void> {
+  public async updateDevices(req: express.Request, res: express.Response) : Promise<void> {
     let uuid : string = await this.isAdmin(req);
+    let devices : Device[] = req.body.devices ? req.body.devices : null;
+
+    if(! devices) {
+      res.status(400).send();
+    }
+
     if(uuid) {
-      let device : Device = this.parse(new Device(),req.body);
-      if(device) {
-        let result : boolean = await this.store.updateDevice(device,uuid);
+        let result : boolean = await this.store.updateDevices(devices,uuid);
         if (result) res.status(200).send();
         else res.status(400).send();
-      }
-      else{
-        res.status(400).send();
-      }
     }
     else {
       res.status(401).send();
@@ -111,15 +112,14 @@ export class Server {
   }
 
   private async loginUser(req: express.Request, res: express.Response) {
-    if (
-      req.body &&
-      req.body.user &&
-      req.body.pw &&
-      (await this.store.validateUserCredentials(req.body.user, req.body.pw))
+    let name: string = req.body.name ? req.body.name : null;
+    let keyword: string = req.body.keyword ? req.body.keyword : null;
+    if (await this.store.validateUserCredentials(name, keyword)
     ) {
-      let uuid = await this.store.getUserUuid(req.body.user);
-      let userRole = await this.store.getUserRole(req.body.user);
+      let uuid = await this.store.getUserUuid(name);
+      let userRole = await this.store.getUserRole(name);
       let token = await this.store.createToken(userRole,uuid);
+      console.log("token done");
       res.status(200).send(JSON.stringify(token));
     } else {
       res.status(401).send();
@@ -129,7 +129,6 @@ export class Server {
   private async registerUser(req: express.Request, res: express.Response) {
     let name: string = req.body.name ? req.body.name : null;
     let keyword: string = req.body.keyword ? req.body.keyword : null;
-    console.log(name);
     if(name && keyword)
     {
       let result = await this.store.createUser(name,keyword);
@@ -144,10 +143,14 @@ export class Server {
   private async isAuthorized(request: express.Request): Promise<string> {
     let token = request.headers.authorization ? request.headers.authorization : null;
     console.log(token);
-    if (! token ) return new Promise((resolve,_) => {resolve(null)});
+    if (! token ) {
+       return new Promise((resolve,_) => { resolve(null) });
+    }
 
     let tokenContent : ITokenContent = this.store.decode(token);
+    console.log("exists question");
     let exists: boolean = await this.store.exists(tokenContent.uuid);
+    console.log("exists done");
 
     return exists ? tokenContent.uuid : null ;
   }
