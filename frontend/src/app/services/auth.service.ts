@@ -30,9 +30,12 @@ export class AuthService {
   }
 
   public async login(name: string, word: string): Promise<boolean> {
-    if (this.jwtHelper.tokenGetter() !== null) {
+    let token = this.jwtHelper.tokenGetter();
+
+    if (token && !this.jwtHelper.isTokenExpired(token)) {
       return Promise.resolve(false);
     }
+    
     const response = await fetch(`${location.origin}/api/login`, {
       method: 'POST',
       headers: {

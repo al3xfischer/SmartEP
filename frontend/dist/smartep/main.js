@@ -1209,11 +1209,12 @@ var AuthService = /** @class */ (function () {
     };
     AuthService.prototype.login = function (name, word) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data;
+            var token, response, data;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        if (this.jwtHelper.tokenGetter() !== null) {
+                        token = this.jwtHelper.tokenGetter();
+                        if (token && !this.jwtHelper.isTokenExpired(token)) {
                             return [2 /*return*/, Promise.resolve(false)];
                         }
                         return [4 /*yield*/, fetch(location.origin + "/api/login", {

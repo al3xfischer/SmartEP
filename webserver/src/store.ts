@@ -1,4 +1,3 @@
-import logger from "./logger";
 import jwt = require("jsonwebtoken");
 import * as bcrypt from "bcrypt";
 import { createConnection, Connection, Repository, InsertResult } from "typeorm";
@@ -8,7 +7,6 @@ import { Device } from "./entity/Device";
 import { Action } from "./entity/Action";
 import { Log } from "./entity/Log";
 import { DeviceSubscriber } from "./subscriber/device";
-import { resolve } from "dns";
 
 const uuid = require("uuid/v4");
 const secret = "Cm37oreTmbKYgLer8VUl";
@@ -111,19 +109,7 @@ export default class Store {
    * @memberof Store
    */
   public async connectDb() : Promise<Boolean>{
-    this.connection = await createConnection({
-      type: "mysql",
-      host: "localhost",
-      port: 3306,
-      username: "root",
-      password: "smarteppw",
-      database: "smartep",
-      entities: [
-        __dirname + "/entity/*.ts"
-      ],
-      logging: false,
-      subscribers : [DeviceSubscriber]
-    });
+    this.connection = await createConnection();
 
     if(!!this.connection){
       this.roleRepo = this.connection.getRepository(Role);

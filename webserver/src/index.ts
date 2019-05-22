@@ -37,6 +37,8 @@ export class Server {
     this.app.get("*",this.webContent.bind(this));
     //Port
     this.app.listen(4000);
+    // Bindings
+    this.log.bind(this);
   }
 
   // TODO: delete when app is completed
@@ -51,7 +53,7 @@ export class Server {
   }
 
   private logRequest(req: express.Request, res: express.Response,next: express.NextFunction){
-    logger.info(`(${req.method}) ${req.url} => ${JSON.stringify(req.body)}`);
+    this.log(`(${req.method}) ${req.url} => ${JSON.stringify(req.body)}`);
     next();
   }
 
@@ -119,7 +121,7 @@ export class Server {
       let uuid = await this.store.getUserUuid(name);
       let userRole = await this.store.getUserRole(name);
       let token = await this.store.createToken(userRole,uuid);
-      console.log("token done");
+
       res.status(200).send(JSON.stringify(token));
     } else {
       res.status(401).send();
@@ -165,8 +167,9 @@ export class Server {
     return exists && tokenContent.role === "admin" ? tokenContent.uuid : null;
   }
 
-  private parse<Target>(target : Target,data: object) : Target {
-    return Object.assign(target,data);
+  private log(message: string) : void {
+    logger.info(message);
+    this.store.logMessage(message);
   }
 }
 
