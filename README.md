@@ -1,8 +1,8 @@
 # SmartEP
 
-Existing users after Setup:
-    admin with pw: admin
-    user with pw: user
+###Existing users after Setup:
+    -admin with pw: admin
+    -user with pw: user
 
 # Dev Info:
 
