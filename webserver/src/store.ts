@@ -6,7 +6,6 @@ import {Role} from "./entity/Role";
 import { Device } from "./entity/Device";
 import { Action } from "./entity/Action";
 import { Log } from "./entity/Log";
-import { DeviceSubscriber } from "./subscriber/device";
 
 const uuid = require("uuid/v4");
 const secret = "Cm37oreTmbKYgLer8VUl";
@@ -31,6 +30,14 @@ export interface ITokenContent {
 }
 
 export default class Store {
+
+  /**
+   * The flag whether to use the secure way or not.
+   * @private
+   * @type {boolean}
+   * @memberof Store
+   */
+  private _secure : boolean;
   
   /**
    * The database connection.
@@ -103,6 +110,17 @@ export default class Store {
   }
 
   /**
+   * Gets the scecure flag.
+   *
+   * @readonly
+   * @type {boolean}
+   * @memberof Store
+   */
+  public get secure() : boolean {
+    return this._secure;
+  }
+
+  /**
    * Connect to database.
    *
    * @returns {Promise<Boolean>}
@@ -121,6 +139,15 @@ export default class Store {
 
     // return whether the connection got initialized
     return !!this.connection;
+  }
+
+  /**
+   * Changes the secure flage.
+   *
+   * @memberof Store
+   */
+  public toggleSecure() : void {
+    this._secure = !this._secure;
   }
 
   /**

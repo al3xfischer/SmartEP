@@ -15,7 +15,7 @@
         dehaze
       </i>
     </button>
-    <div class="dropdown-menu bg-dark">
+    <div class="dropdown-menu bg-dark pull-left">
       <a class="dropdown-item nav-link bg-dark text-light" *ngIf="showLogin" [routerLink]="['/login']">Login</a>
       <a class="dropdown-item nav-link bg-dark text-light" *ngIf="!showLogin" (click)="logout()" [routerLink]="['/login']">Logout</a>
       <a class="dropdown-item nav-link bg-dark text-light" *ngIf="showAdmin" [routerLink]="['/admin']">Admin</a>

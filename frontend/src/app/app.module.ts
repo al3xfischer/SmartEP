@@ -5,7 +5,7 @@ import {
 } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { MatTableModule, MatSortModule, MatTabsModule, MatInputModule } from '@angular/material';
+import { MatTableModule, MatSortModule, MatTabsModule, MatInputModule, MatSlideToggle, MatSlideToggleModule } from '@angular/material';
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { NavbarComponent } from "./navbar/navbar.component";
@@ -42,6 +42,7 @@ export function getToken() {
   ],
   imports: [
     MatTabsModule,
+    MatSlideToggleModule,
     MatSortModule,
     MatTableModule,
     BrowserModule,

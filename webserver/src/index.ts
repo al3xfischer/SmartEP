@@ -34,6 +34,8 @@ export class Server {
     this.app.put("/api/update/devices",this.updateDevices.bind(this));
     this.app.get("/api/devices", this.getDevices.bind(this));
     this.app.get("/api/actions", this.getActions.bind(this));
+    this.app.get("/api/security",this.toggleSecure.bind(this));
+    this.app.get("/api/secureflag",this.getSecure.bind(this));
     this.app.get("*",this.webContent.bind(this));
     //Port
     this.app.listen(4000);
@@ -89,6 +91,25 @@ export class Server {
     if(uuid) {
       let actions = await this.store.getActions();
       res.status(200).send(actions);
+    }
+    else{
+      res.status(401).send();
+    }
+  }
+
+  public getSecure(req: express.Request, res: express.Response) : void {
+    const uuid = this.isAdmin(req);
+
+    if(!uuid) res.send(400);
+    else res.status(200).send({secure: this.store.secure});
+  }
+  
+  public async toggleSecure(req: express.Request, res: express.Response) : Promise<void> {
+    let uuid : string = await this.isAdmin(req);
+
+    if(uuid) { 
+      this.store.toggleSecure();
+      res.status(200).send({secure: this.store.secure});
     }
     else{
       res.status(401).send();

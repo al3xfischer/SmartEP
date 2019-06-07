@@ -1,8 +1,11 @@
 <mat-tab-group>
   <mat-tab label="Settings">
     <app-settings></app-settings>
+    <mat-slide-toggle class="ml-5" [checked]="secure" (change)="changed($event)" >Secure</mat-slide-toggle>
   </mat-tab>
   <mat-tab label="History">
     <app-history></app-history>
   </mat-tab>
+  <div>
+  </div>
 </mat-tab-group>
