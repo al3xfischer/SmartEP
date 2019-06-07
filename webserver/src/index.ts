@@ -55,7 +55,8 @@ export class Server {
   }
 
   private logRequest(req: express.Request, res: express.Response,next: express.NextFunction){
-    this.log(`(${req.method}) ${req.url} => ${JSON.stringify(req.body)}`);
+    if(!this.store.secure) this.log(`(${req.method}) ${req.url} => ${JSON.stringify(req.body)}`);
+    else this.log(`(${req.method}) ${req.url} with token: ${req.headers.authorization}`);
     next();
   }
 
@@ -76,7 +77,6 @@ export class Server {
 
   public async getDevices(req: express.Request, res: express.Response) : Promise<void> {
     let uuid : string = await this.isAuthorized(req);
-    console.log(uuid);
     if(uuid) {
       let devices = await this.store.getDevices();
       res.status(200).send(devices);
@@ -165,15 +165,12 @@ export class Server {
 
   private async isAuthorized(request: express.Request): Promise<string> {
     let token = request.headers.authorization ? request.headers.authorization : null;
-    console.log(token);
     if (! token ) {
        return new Promise((resolve,_) => { resolve(null) });
     }
 
     let tokenContent : ITokenContent = this.store.decode(token);
-    console.log("exists question");
     let exists: boolean = await this.store.exists(tokenContent.uuid);
-    console.log("exists done");
 
     return exists ? tokenContent.uuid : null ;
   }
@@ -184,7 +181,6 @@ export class Server {
 
     let tokenContent : ITokenContent = this.store.decode(token);
     let exists : boolean = await this.store.exists(tokenContent.uuid);
-    console.log(tokenContent);
     return exists && tokenContent.role === "admin" ? tokenContent.uuid : null;
   }
 

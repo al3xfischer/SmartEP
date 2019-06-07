@@ -166,7 +166,6 @@ export default class Store {
     const identifier: string = uuid();
     let user = await this.userRepo.findOne({name: userName});
     user.uuid = identifier;
-    console.log(user);
     this.userRepo.save(user);
     return identifier;
   }
@@ -234,7 +233,6 @@ export default class Store {
     user.uuid = uuid();
 
     let result: InsertResult = await this.handleError(this.userRepo.insert(user));
-    console.log(result);
     // return whether the insert was succesfull;
     return !!result;
   }
@@ -262,7 +260,6 @@ export default class Store {
        action.user = this.cleanUser(action.user);
      }
 
-     console.log(actions);
      return actions;
   }
 
