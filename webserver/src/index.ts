@@ -66,11 +66,13 @@ export class Server {
       allowedExt.filter((ext: string) => req.url.indexOf(ext) > 0).length > 0
     ) {
       res.sendFile(
-        path.resolve(`../frontend/dist/smartep/${req.url}`),
+        // path.resolve(`../frontend/dist/smartep/${req.url}`),
+        path.resolve(`./page/${req.url}`),
       );
     } else {
       res.sendFile(
-        path.resolve("../frontend/dist/smartep/index.html"),
+        path.resolve("./page/index.html"),
+        // path.resolve("../frontend/dist/smartep/index.html"),
       );
     }
   }

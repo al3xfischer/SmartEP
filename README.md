@@ -4,15 +4,17 @@
     -admin with pw: admin
     -user with pw: user
 
-# Dev Info:
+# Start services
+    Change directory to SmartEP
+    execute command "docker-compose up" to start all necessary services or
+    execute "docker-compose up --build" to create clean services 
+    open browser with url: localhost:4000
+
+# Develop App:
+    The compiled files of the webpage (e.g from <ProjectName>/dist/<ProjectName>/*) must be copied into the folder "webserver/page"
+    For use without docker change the host in the webserver/ormconfig.json to your hostname (e.g. localhost)
 
 ## DB Infos
     - Use: root
     - Pw: smarteppw
     - Database: smartep    
-
-## Backup
-docker exec CONTAINER /usr/bin/mysqldump -u root --password=smarteppw smartep | Set-Content backup.sql
-
-## Restore
-cat backup.sql | docker exec -i CONTAINER /usr/bin/mysql -u root --password=smarteppw DATABASE
