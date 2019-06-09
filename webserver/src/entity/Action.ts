@@ -14,7 +14,7 @@ export class Action {
     @Column({name: "Stamp"})
     public stamp: Date;
 
-    @Column({name: "UserId", nullable: true, default: null})
+    @Column({name: "UserId"})
     public userId:  number;
 
     @ManyToOne(type => User, {eager: true})
