@@ -8,14 +8,18 @@ export class FlagsService {
 
   constructor(private auth: AuthService) { }
 
-  public toggleFlag() : void {
-    fetch(`${location.origin}/api/secure`, {
-      method: 'GET',
+  public toggleFlag(value : boolean) : Promise<boolean> {
+    return fetch(`${location.origin}/api/security`, {
+      method: 'PUT',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization': this.auth.getToken()
       },
+      body: JSON.stringify({secure: value})
+    }).then(res => {
+      if(res.ok) return true;
+      else return false;
     });
   }
 

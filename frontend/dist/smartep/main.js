@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-tab-group>\r\n  <mat-tab label=\"Settings\">\r\n    <app-settings></app-settings>\r\n    <mat-slide-toggle class=\"ml-5\" [checked]=\"secure\" (change)=\"changed($event)\" >Secure</mat-slide-toggle>\r\n  </mat-tab>\r\n  <mat-tab label=\"History\">\r\n    <app-history></app-history>\r\n  </mat-tab>\r\n  <div>\r\n  </div>\r\n</mat-tab-group>"
+module.exports = "<mat-slide-toggle class=\"ml-5\" [checked]=\"secure\" (change)=\"changed($event)\" >Secure</mat-slide-toggle>\r\n<mat-tab-group>\r\n  <mat-tab label=\"Settings\">\r\n    <app-settings></app-settings>\r\n  </mat-tab>\r\n  <mat-tab label=\"History\">\r\n    <app-history></app-history>\r\n  </mat-tab>\r\n  <div>\r\n  </div>\r\n</mat-tab-group>"
 
 /***/ }),
 
@@ -123,7 +123,7 @@ var AdminComponent = /** @class */ (function () {
         });
     };
     AdminComponent.prototype.changed = function (value) {
-        this.flagService.toggleFlag();
+        this.flagService.toggleFlag(value.checked);
     };
     AdminComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1508,14 +1508,20 @@ var FlagsService = /** @class */ (function () {
     function FlagsService(auth) {
         this.auth = auth;
     }
-    FlagsService.prototype.toggleFlag = function () {
-        fetch(location.origin + "/api/secure", {
-            method: 'GET',
+    FlagsService.prototype.toggleFlag = function (value) {
+        return fetch(location.origin + "/api/security", {
+            method: 'PUT',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Authorization': this.auth.getToken()
             },
+            body: JSON.stringify({ secure: value })
+        }).then(function (res) {
+            if (res.ok)
+                return true;
+            else
+                return false;
         });
     };
     FlagsService.prototype.secureFlag = function () {

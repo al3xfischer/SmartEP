@@ -31,10 +31,10 @@ export class Server {
     //Publicly accessible routes
     this.app.post("/api/login", this.loginUser.bind(this));
     this.app.post("/api/register",this.registerUser.bind(this));
+    this.app.put("/api/security",this.toggleSecure.bind(this));
     this.app.put("/api/update/devices",this.updateDevices.bind(this));
     this.app.get("/api/devices", this.getDevices.bind(this));
     this.app.get("/api/actions", this.getActions.bind(this));
-    this.app.get("/api/security",this.toggleSecure.bind(this));
     this.app.get("/api/secureflag",this.getSecure.bind(this));
     this.app.get("*",this.webContent.bind(this));
     //Port
@@ -106,9 +106,9 @@ export class Server {
   
   public async toggleSecure(req: express.Request, res: express.Response) : Promise<void> {
     let uuid : string = await this.isAdmin(req);
-
-    if(uuid) { 
-      this.store.toggleSecure();
+    let value : boolean = req.body.secure;
+    if(uuid && (value === true || value === false)) { 
+      this.store.toggleSecure(value);
       res.status(200).send({secure: this.store.secure});
     }
     else{

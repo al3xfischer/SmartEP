@@ -146,8 +146,8 @@ export default class Store {
    *
    * @memberof Store
    */
-  public toggleSecure() : void {
-    this._secure = !this._secure;
+  public toggleSecure(value: boolean) : void {
+    if(value === true || value === false)  this._secure = value;
   }
 
   /**

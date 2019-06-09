@@ -20,6 +20,6 @@ export class AdminComponent implements OnInit {
   }
 
   public changed(value: MatSlideToggleChange): void {
-    this.flagService.toggleFlag();
+    this.flagService.toggleFlag(value.checked);
   }
 }
