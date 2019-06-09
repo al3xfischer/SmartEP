@@ -1,10 +1,14 @@
-import { EventSubscriber,EntitySubscriberInterface, UpdateEvent, Repository } from "typeorm";
+import { EventSubscriber,EntitySubscriberInterface, UpdateEvent, Repository, Entity } from "typeorm";
 import { Device } from "../entity/Device";
 import { Action } from "../entity/Action";
 import { User } from "../entity/User";
 
 @EventSubscriber()
 export class DeviceSubscriber implements EntitySubscriberInterface<Device> {
+
+    listenTo() {
+        return Device;
+    }
 
     public beforeUpdate(event: UpdateEvent<Device>) : void {
         let { entity, databaseEntity,updatedColumns,connection,queryRunner } = event;

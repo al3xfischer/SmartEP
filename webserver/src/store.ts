@@ -166,7 +166,7 @@ export default class Store {
     const identifier: string = uuid();
     let user = await this.userRepo.findOne({name: userName});
     user.uuid = identifier;
-    this.userRepo.save(user);
+    await this.userRepo.save(user);
     return identifier;
   }
 
@@ -208,6 +208,7 @@ export default class Store {
     }
     
     let user: User = await this.userRepo.findOne({ name: userName});
+    if(!user || !user.salt) return false;
     let hashResult: IHashResult = await this.hash(key,user.salt);
     return user.keyword == hashResult.hash;
   }
@@ -279,7 +280,7 @@ export default class Store {
     action.action = operation
     action.stamp = new Date();
     action.userId = user.id;
-    let result = this.handleError(this.actionRepo.save(action));
+    let result = await this.handleError(this.actionRepo.save(action));
     return !!result;
   }
 
@@ -406,7 +407,6 @@ export default class Store {
   private async handleError<T>(action: Promise<T>) : Promise<T> {
     
     let result = await action.catch(error => {
-      console.log(`error: ${error}`);
       this.logRepo.insert(new Log({ message: `error: ${error}`, stamp: new Date() }));
     });
 
