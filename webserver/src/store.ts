@@ -190,6 +190,26 @@ export default class Store {
     }
   }
 
+    /**
+   * Gets the name for the uuid.
+   *
+   * @param {string} userName
+   * @returns {Promise<string>}
+   * @memberof Store
+   */
+  public async getUserName(uuid: string): Promise<string> {
+    if (!uuid) {
+      return null;
+    }
+    let user = await this.handleError(this.userRepo.findOne({uuid: uuid}));
+    if(user){
+      return user.name;
+    }
+    else{
+      return null;
+    }
+  }
+
   /**
    * Validates the user credentials.
    * Key in clear text.
@@ -262,6 +282,22 @@ export default class Store {
      }
 
      return actions;
+  }
+
+  /**
+   * Get all log entries
+   *
+   * @returns {Promise<Log[]>}
+   * @memberof Store
+   */
+  public async getLogs() : Promise<Log[]> {
+    let logs = await this.logRepo.find();
+
+    for(let log of logs){
+      log.user = this.cleanUser(log.user);
+    }
+
+    return logs;
   }
 
   /**
@@ -436,7 +472,16 @@ export default class Store {
     }); 
   }
 
+  /**
+   * Remove sensitive data from the user object
+   *
+   * @private
+   * @param {User} user
+   * @returns {User}
+   * @memberof Store
+   */
   private cleanUser(user: User) : User{
+    if(!user) return {name: 'Unknown'} as User;
     let data = user as any;
     for(let key of Object.keys(data))
     {

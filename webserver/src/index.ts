@@ -3,6 +3,7 @@ import * as path from "path";
 import Store, { ITokenContent } from "./store";
 import logger from "./logger";
 import { Device } from "./entity/Device";
+import { Log } from "./entity/Log";
 
 const bodyParser = require("body-parser");
 
@@ -36,6 +37,7 @@ export class Server {
     this.app.get("/api/devices", this.getDevices.bind(this));
     this.app.get("/api/actions", this.getActions.bind(this));
     this.app.get("/api/secureflag",this.getSecure.bind(this));
+    this.app.get("/api/logs",this.getLogs.bind(this));
     this.app.get("*",this.webContent.bind(this));
     //Port
     this.app.listen(4000);
@@ -66,13 +68,13 @@ export class Server {
       allowedExt.filter((ext: string) => req.url.indexOf(ext) > 0).length > 0
     ) {
       res.sendFile(
-        // path.resolve(`../frontend/dist/smartep/${req.url}`),
-        path.resolve(`./page/${req.url}`),
+        path.resolve(`../frontend/dist/smartep/${req.url}`),
+        // path.resolve(`./page/${req.url}`),
       );
     } else {
       res.sendFile(
-        path.resolve("./page/index.html"),
-        // path.resolve("../frontend/dist/smartep/index.html"),
+        // path.resolve("./page/index.html"),
+        path.resolve("../frontend/dist/smartep/index.html"),
       );
     }
   }
@@ -97,6 +99,18 @@ export class Server {
     else{
       res.status(401).send();
     }
+  }
+
+  public async getLogs(req: express.Request, res: express.Response) : Promise<void> {
+    let uuid : string = await this.isAdmin(req);
+    if(uuid) {
+      let logs : Log[] = await this.store.getLogs();
+      res.status(200).send(logs);
+    }
+    else{
+      res.send(401).send();
+    }
+
   }
 
   public getSecure(req: express.Request, res: express.Response) : void {
@@ -183,6 +197,12 @@ export class Server {
 
     let tokenContent : ITokenContent = this.store.decode(token);
     let exists : boolean = await this.store.exists(tokenContent.uuid);
+    
+    if(this.store.secure){
+      let name : string = await this.store.getUserName(tokenContent.uuid);
+      this.log(`User: "${name}" has role: "${tokenContent.role}"`);
+    }
+    
     return exists && tokenContent.role === "admin" ? tokenContent.uuid : null;
   }
 

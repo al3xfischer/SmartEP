@@ -18,6 +18,7 @@ import { RegisterComponent } from "./register/register.component";
 import { DevicesComponent } from './devices/devices.component';
 import { HistoryComponent } from './history/history.component';
 import { SettingsComponent } from './settings/settings.component';
+import { LogsComponent } from './logs/logs.component';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
@@ -39,6 +40,7 @@ export function getToken() {
     DevicesComponent,
     HistoryComponent,
     SettingsComponent,
+    LogsComponent,
   ],
   imports: [
     MatTabsModule,
