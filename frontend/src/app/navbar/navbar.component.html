@@ -9,13 +9,13 @@
       </li>
     </ul>
   </div>
-  <div class="dropdown d-lg-none float-right">
+  <div class="dropdown d-lg-none dropleft">
     <button type="button" class="bg-transparent border-0" data-toggle="dropdown">
       <i class="material-icons">
         dehaze
       </i>
     </button>
-    <div class="dropdown-menu bg-dark pull-left">
+    <div class="dropdown-menu bg-dark">
       <a class="dropdown-item nav-link bg-dark text-light" *ngIf="showLogin" [routerLink]="['/login']">Login</a>
       <a class="dropdown-item nav-link bg-dark text-light" *ngIf="!showLogin" (click)="logout()" [routerLink]="['/login']">Logout</a>
       <a class="dropdown-item nav-link bg-dark text-light" *ngIf="showAdmin" [routerLink]="['/admin']">Admin</a>
