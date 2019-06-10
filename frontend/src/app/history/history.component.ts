@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { Action } from '../classes/Action';
 import { ActionService } from '../services/action.service';
+import { RefreshService } from '../services/refresh.service';
 
 @Component({
   selector: 'app-history',
@@ -12,10 +13,16 @@ export class HistoryComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private actionService : ActionService) {
+  constructor(private actionService : ActionService, private refershService: RefreshService) {
     
     this.ngOnInit.bind(this);
     this.columnNames = ['action','stamp','user'];
+
+    this.refershService.refresh.subscribe(key => {
+      if(key === 'History'){
+        this.ngOnInit();
+      }
+    });
   }
 
   async ngOnInit() {

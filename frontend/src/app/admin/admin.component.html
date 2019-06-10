@@ -1,5 +1,16 @@
-<mat-slide-toggle class="ml-5" [checked]="secure" (change)="changed($event)" >Secure</mat-slide-toggle>
-<mat-tab-group>
+<mat-slide-toggle class="ml-5" [checked]="secure" (change)="changed($event)" >
+  <div *ngIf="secure; else secoff">
+    <div class="security oncolor">
+      Security ON
+    </div>
+  </div>
+  <ng-template #secoff>
+    <div class="security bg-danger">
+      Security OFF
+    </div>
+</ng-template>
+</mat-slide-toggle>
+<mat-tab-group (selectedTabChange)="tabChanged($event)">
   <mat-tab label="Settings">
     <app-settings></app-settings>
   </mat-tab>

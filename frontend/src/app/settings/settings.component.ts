@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/cor
 import { DeviceService } from '../services/device.service';
 import { Device } from '../classes/Device';
 import { MatSort, MatTableDataSource } from '@angular/material';
+import { RefreshService } from '../services/refresh.service';
 
 @Component({
   selector: 'app-settings',
@@ -12,10 +13,16 @@ export class SettingsComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private deviceService : DeviceService) {
+  constructor(private deviceService : DeviceService, private refershService: RefreshService) {
     
     this.ngOnInit.bind(this);
     this.columnNames = ['name','actual','set'];
+
+    this.refershService.refresh.subscribe(key => {
+      if(key === 'Settings'){
+        this.ngOnInit();
+      }
+    });
   }
 
   async ngOnInit() {

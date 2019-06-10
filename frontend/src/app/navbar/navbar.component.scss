@@ -17,40 +17,6 @@ nav a img{
     font-size: 18px;
  }
 
- #amount{
-    border-radius: 100%;
-    background-color: orangered;
-    font-size: 12px;
-    color: black;
-    padding: 4px;
- }
-
- #amountSpan{
-     position: absolute;
-     text-align: center;
-     padding-left: 1.7em;
-     padding-top: -3em;
- }
-
  #mobile{
     visibility: none;
  }
-
- #cart{
-    float: right;
- }
-
- @media only screen and (max-width: 800px) {
-}
-
-@media only screen and (max-width: 450px) {
-   // #mobile{
-   //    visibility: visible;
-   // }
-
-   // #desktop{
-   //    .desktop{
-   //       visibility: none;
-   //    }
-   // }
-}

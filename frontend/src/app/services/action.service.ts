@@ -7,15 +7,11 @@ import { AuthService } from './auth.service';
 })
 export class ActionService {
 
-  private _actions : Action[];
-
   constructor(private auth : AuthService) {
-    this._actions = [];
    }
 
   public async getActions() : Promise<Action[]> {
     return new Promise<Action[]>((resolve) => {
-
       fetch(location.origin + '/api/actions', {
         headers: {
           Accept: 'application/json',
@@ -32,7 +28,6 @@ export class ActionService {
       })
       .then(data => {
         if (data) {
-          this._actions = data;
           resolve(data);
         }
       })
