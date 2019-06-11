@@ -50,7 +50,7 @@ export class Server {
     let token: ITokenContent = req.headers.authorization ? this.store.decode(req.headers.authorization) : null;
     let uuid: string = token ? token.uuid : null
     if(this.store.secure){
-      this.log(`(${req.method}) ${req.url} => ${req.headers.authorization}`,uuid);
+      this.log(`${req.ip} (${req.method}) ${req.url} => ${req.headers.authorization}`,uuid);
     } else { 
       this.log(`(${req.method}) ${req.url} => ${JSON.stringify(req.body)}`);
     }
