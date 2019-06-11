@@ -1,5 +1,5 @@
 import jwt = require("jsonwebtoken");
-import * as bcrypt from "bcrypt";
+import * as bcrypt from "bcryptjs";
 import { createConnection, Connection, Repository, InsertResult } from "typeorm";
 import {User} from "./entity/User";
 import {Role} from "./entity/Role";

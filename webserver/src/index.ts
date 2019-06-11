@@ -41,7 +41,7 @@ export class Server {
     this.app.get("/api/logs",this.getLogs.bind(this));
     this.app.get("*",this.webContent.bind(this));
     //Port
-    this.app.listen(4000);
+    this.app.listen(4000, "0.0.0.0");
     // Bindings
     this.log.bind(this);
   }
@@ -50,7 +50,11 @@ export class Server {
     let token: ITokenContent = req.headers.authorization ? this.store.decode(req.headers.authorization) : null;
     let uuid: string = token ? token.uuid : null
     if(this.store.secure){
-      this.log(`${req.ip} (${req.method}) ${req.url} => ${req.headers.authorization}`,uuid);
+       if(req.url == '/api/login') {
+          this.log(`${req.ip} (${req.method}) ${req.url} => username: ${JSON.stringify(req.body.name)}`,uuid);
+        } else {
+          this.log(`${req.ip} (${req.method}) ${req.url} => ${req.headers.authorization}`,uuid);
+        }
     } else { 
       this.log(`(${req.method}) ${req.url} => ${JSON.stringify(req.body)}`);
     }
