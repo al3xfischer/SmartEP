@@ -197,13 +197,13 @@ export default class Store {
    * @returns {Promise<string>}
    * @memberof Store
    */
-  public async getUserName(uuid: string): Promise<string> {
+  public async getUser(uuid: string): Promise<User> {
     if (!uuid) {
       return null;
     }
     let user = await this.handleError(this.userRepo.findOne({uuid: uuid}));
     if(user){
-      return user.name;
+      return user;
     }
     else{
       return null;

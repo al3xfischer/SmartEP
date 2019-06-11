@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, OnDestroy } from '@angular/core';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { Action } from '../classes/Action';
 import { ActionService } from '../services/action.service';
@@ -9,16 +9,22 @@ import { RefreshService } from '../services/refresh.service';
   templateUrl: './history.component.html',
   styleUrls: ['./history.component.scss']
 })
-export class HistoryComponent implements OnInit {
+export class HistoryComponent implements OnInit, OnDestroy {
+
+  ngOnDestroy(): void {
+    if(this.refershService) this.refreshEvent.unsubscribe();
+  }
 
   @ViewChild(MatSort) sort: MatSort;
+
+  private refreshEvent : any;
 
   constructor(private actionService : ActionService, private refershService: RefreshService) {
     
     this.ngOnInit.bind(this);
     this.columnNames = ['action','stamp','user'];
 
-    this.refershService.refresh.subscribe(key => {
+    this.refreshEvent = this.refershService.refresh.subscribe(key => {
       if(key === 'History'){
         this.ngOnInit();
       }

@@ -4,6 +4,7 @@ import Store, { ITokenContent } from "./store";
 import logger from "./logger";
 import { Device } from "./entity/Device";
 import { Log } from "./entity/Log";
+import { User } from "./entity/User";
 
 const bodyParser = require("body-parser");
 
@@ -45,20 +46,14 @@ export class Server {
     this.log.bind(this);
   }
 
-  // TODO: delete when app is completed
-  private async test(): Promise<void> {
-    let result = await this.store.connectDb();
-    // let added = await this.store.createUser("admin","admin");
-    // let added1 = await this.store.createUser("peter","peter");
-    // let added2 = await this.store.createUser("kevin","kevin");
-    // let added3 = await this.store.createUser("alex","alex");
-    // console.log(`added: ${added}`);
-    console.log(`Connected:  ${result}`);
-  }
-
-  private logRequest(req: express.Request, res: express.Response,next: express.NextFunction){
-    if(!this.store.secure) this.log(`(${req.method}) ${req.url} => ${JSON.stringify(req.body)}`);
-    else this.log(`(${req.method}) ${req.url} with token: ${req.headers.authorization}`);
+  private async logRequest(req: express.Request, res: express.Response,next: express.NextFunction){
+    let token: ITokenContent = req.headers.authorization ? this.store.decode(req.headers.authorization) : null;
+    let uuid: string = token ? token.uuid : null
+    if(this.store.secure){
+      this.log(`(${req.method}) ${req.url} => ${req.headers.authorization}`,uuid);
+    } else { 
+      this.log(`(${req.method}) ${req.url} => ${JSON.stringify(req.body)}`);
+    }
     next();
   }
 
@@ -68,13 +63,13 @@ export class Server {
       allowedExt.filter((ext: string) => req.url.indexOf(ext) > 0).length > 0
     ) {
       res.sendFile(
-        path.resolve(`../frontend/dist/smartep/${req.url}`),
-        // path.resolve(`./page/${req.url}`),
+        //path.resolve(`../frontend/dist/smartep/${req.url}`),
+        path.resolve(`./page/${req.url}`),
       );
     } else {
       res.sendFile(
-        // path.resolve("./page/index.html"),
-        path.resolve("../frontend/dist/smartep/index.html"),
+        path.resolve("./page/index.html"),
+        // path.resolve("../frontend/dist/smartep/index.html"),
       );
     }
   }
@@ -199,16 +194,21 @@ export class Server {
     let exists : boolean = await this.store.exists(tokenContent.uuid);
     
     if(this.store.secure){
-      let name : string = await this.store.getUserName(tokenContent.uuid);
-      this.log(`User: "${name}" has role: "${tokenContent.role}"`);
+      this.log(`Role: "${tokenContent.role}"`,tokenContent.uuid);
     }
     
     return exists && tokenContent.role === "admin" ? tokenContent.uuid : null;
   }
 
-  private log(message: string) : void {
-    logger.info(message);
-    this.store.logMessage(message);
+  private async log(message: string, uuid?: string) : Promise<void> {
+    if(uuid) {
+      let user : User = await this.store.getUser(uuid);
+      this.store.logMessage(message,user.id);
+      logger.info(message + ` User: ${user.name}`);
+    } else {
+      this.store.logMessage(message);
+      logger.info(message);
+    }
   }
 }
 

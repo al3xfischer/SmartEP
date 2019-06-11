@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-slide-toggle class=\"ml-5\" [checked]=\"secure\" (change)=\"changed($event)\" >Secure</mat-slide-toggle>\r\n<mat-tab-group>\r\n  <mat-tab label=\"Settings\">\r\n    <app-settings></app-settings>\r\n  </mat-tab>\r\n  <mat-tab label=\"History\">\r\n    <app-history></app-history>\r\n  </mat-tab>\r\n  <div>\r\n  </div>\r\n</mat-tab-group>"
+module.exports = "<mat-slide-toggle class=\"ml-5\" [checked]=\"secure\" (change)=\"changed($event)\" >\n  <div *ngIf=\"secure; else secoff\">\n    <div class=\"security oncolor\">\n      Security ON\n    </div>\n  </div>\n  <ng-template #secoff>\n    <div class=\"security bg-danger\">\n      Security OFF\n    </div>\n</ng-template>\n</mat-slide-toggle>\n<mat-tab-group (selectedTabChange)=\"tabChanged($event)\">\n  <mat-tab label=\"Settings\">\n    <app-settings></app-settings>\n  </mat-tab>\n  <mat-tab label=\"History\">\n    <app-history></app-history>\n  </mat-tab>\n  <mat-tab label=\"Logs\">\n    <app-logs></app-logs>\n  </mat-tab>\n  <div>\n  </div>\n</mat-tab-group>"
 
 /***/ }),
 
@@ -41,7 +41,7 @@ module.exports = "<mat-slide-toggle class=\"ml-5\" [checked]=\"secure\" (change)
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "mat-tab-group {\n  background-color: white;\n  height: 100%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYWRtaW4vQzpcXFVzZXJzXFxBbGV4XFxEb2N1bWVudHNcXGZoXFw0c2VtZXN0ZXJcXHNlY3VyaXR5XFxTbWFydEVQXFxmcm9udGVuZC9zcmNcXGFwcFxcYWRtaW5cXGFkbWluLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksdUJBQXVCO0VBQ3ZCLFlBQVksRUFBQSIsImZpbGUiOiJzcmMvYXBwL2FkbWluL2FkbWluLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsibWF0LXRhYi1ncm91cHtcclxuICAgIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xyXG4gICAgaGVpZ2h0OiAxMDAlO1xyXG59Il19 */"
+module.exports = "mat-tab-group {\n  background-color: white;\n  height: 97%; }\n\n.security {\n  width: 7rem;\n  height: 100%;\n  text-align: center; }\n\n.oncolor {\n  background-color: #41ff28; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2FsZXgvZG9jdW1lbnRzL2ZoLzRfc2VtZXN0ZXIvc2VjdXJpdHkvU21hcnRFUC9mcm9udGVuZC9zcmMvYXBwL2FkbWluL2FkbWluLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksdUJBQXVCO0VBQ3ZCLFdBQVcsRUFBQTs7QUFHZjtFQUNJLFdBQVc7RUFDWCxZQUFZO0VBQ1osa0JBQWtCLEVBQUE7O0FBR3RCO0VBQ0kseUJBQXlCLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9hZG1pbi9hZG1pbi5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIm1hdC10YWItZ3JvdXB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gICAgaGVpZ2h0OiA5NyU7XG59XG5cbi5zZWN1cml0eSB7XG4gICAgd2lkdGg6IDdyZW07XG4gICAgaGVpZ2h0OiAxMDAlO1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbn1cblxuLm9uY29sb3J7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzQxZmYyODtcbn0iXX0= */"
 
 /***/ }),
 
@@ -57,6 +57,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AdminComponent", function() { return AdminComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_flags_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/flags.service */ "./src/app/services/flags.service.ts");
+/* harmony import */ var _services_refresh_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/refresh.service */ "./src/app/services/refresh.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -103,9 +104,11 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 };
 
 
+
 var AdminComponent = /** @class */ (function () {
-    function AdminComponent(flagService) {
+    function AdminComponent(flagService, refreshService) {
         this.flagService = flagService;
+        this.refreshService = refreshService;
     }
     AdminComponent.prototype.ngOnInit = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -123,15 +126,23 @@ var AdminComponent = /** @class */ (function () {
         });
     };
     AdminComponent.prototype.changed = function (value) {
+        this.secure = value.checked;
         this.flagService.toggleFlag(value.checked);
     };
+    AdminComponent.prototype.tabChanged = function (event) {
+        this.refreshService.trigger(event.tab.textLabel);
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Boolean)
+    ], AdminComponent.prototype, "secure", void 0);
     AdminComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-admin',
             template: __webpack_require__(/*! ./admin.component.html */ "./src/app/admin/admin.component.html"),
             styles: [__webpack_require__(/*! ./admin.component.scss */ "./src/app/admin/admin.component.scss")]
         }),
-        __metadata("design:paramtypes", [_services_flags_service__WEBPACK_IMPORTED_MODULE_1__["FlagsService"]])
+        __metadata("design:paramtypes", [_services_flags_service__WEBPACK_IMPORTED_MODULE_1__["FlagsService"], _services_refresh_service__WEBPACK_IMPORTED_MODULE_2__["RefreshService"]])
     ], AdminComponent);
     return AdminComponent;
 }());
@@ -158,14 +169,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_roleguard_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./services/roleguard.service */ "./src/app/services/roleguard.service.ts");
 /* harmony import */ var _register_register_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./register/register.component */ "./src/app/register/register.component.ts");
 /* harmony import */ var _devices_devices_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./devices/devices.component */ "./src/app/devices/devices.component.ts");
-/* harmony import */ var _history_history_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./history/history.component */ "./src/app/history/history.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 
@@ -185,14 +194,6 @@ var routes = [
     {
         path: 'admin',
         component: _admin_admin_component__WEBPACK_IMPORTED_MODULE_3__["AdminComponent"],
-        canActivate: [_services_roleguard_service__WEBPACK_IMPORTED_MODULE_5__["RoleguardService"]],
-        data: {
-            expectedRole: 'admin'
-        }
-    },
-    {
-        path: 'history',
-        component: _history_history_component__WEBPACK_IMPORTED_MODULE_8__["HistoryComponent"],
         canActivate: [_services_roleguard_service__WEBPACK_IMPORTED_MODULE_5__["RoleguardService"]],
         data: {
             expectedRole: 'admin'
@@ -227,7 +228,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-navbar></app-navbar>\r\n<div>\r\n    <router-outlet></router-outlet>\r\n</div>"
+module.exports = "<app-navbar></app-navbar>\n<div>\n    <router-outlet></router-outlet>\n</div>"
 
 /***/ }),
 
@@ -238,7 +239,7 @@ module.exports = "<app-navbar></app-navbar>\r\n<div>\r\n    <router-outlet></rou
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "div {\n  padding-top: 3.7rem;\n  height: 100%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvQzpcXFVzZXJzXFxBbGV4XFxEb2N1bWVudHNcXGZoXFw0c2VtZXN0ZXJcXHNlY3VyaXR5XFxTbWFydEVQXFxmcm9udGVuZC9zcmNcXGFwcFxcYXBwLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksbUJBQW1CO0VBQ25CLFlBQVksRUFBQSIsImZpbGUiOiJzcmMvYXBwL2FwcC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImRpdiB7XHJcbiAgICBwYWRkaW5nLXRvcDogMy43cmVtO1xyXG4gICAgaGVpZ2h0OiAxMDAlO1xyXG59Il19 */"
+module.exports = "div {\n  padding-top: 3.7rem;\n  height: 100%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2FsZXgvZG9jdW1lbnRzL2ZoLzRfc2VtZXN0ZXIvc2VjdXJpdHkvU21hcnRFUC9mcm9udGVuZC9zcmMvYXBwL2FwcC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLG1CQUFtQjtFQUNuQixZQUFZLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9hcHAuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJkaXYge1xuICAgIHBhZGRpbmctdG9wOiAzLjdyZW07XG4gICAgaGVpZ2h0OiAxMDAlO1xufSJdfQ== */"
 
 /***/ }),
 
@@ -306,6 +307,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _devices_devices_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./devices/devices.component */ "./src/app/devices/devices.component.ts");
 /* harmony import */ var _history_history_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./history/history.component */ "./src/app/history/history.component.ts");
 /* harmony import */ var _settings_settings_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./settings/settings.component */ "./src/app/settings/settings.component.ts");
+/* harmony import */ var _logs_logs_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./logs/logs.component */ "./src/app/logs/logs.component.ts");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -325,6 +327,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -370,6 +373,7 @@ var AppModule = /** @class */ (function () {
                 _devices_devices_component__WEBPACK_IMPORTED_MODULE_13__["DevicesComponent"],
                 _history_history_component__WEBPACK_IMPORTED_MODULE_14__["HistoryComponent"],
                 _settings_settings_component__WEBPACK_IMPORTED_MODULE_15__["SettingsComponent"],
+                _logs_logs_component__WEBPACK_IMPORTED_MODULE_16__["LogsComponent"],
             ],
             imports: [
                 _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatTabsModule"],
@@ -412,7 +416,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"col align-self-center\">\r\n      <table mat-table [dataSource]=\"devices\" matSort class=\"mat-elevation-z8 center\">\r\n        \r\n        <ng-container matColumnDef=\"name\">\r\n          <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>\r\n          <td mat-cell *matCellDef=\"let device\"> {{device.name}} </td>\r\n        </ng-container>\r\n        \r\n        <ng-container matColumnDef=\"actual\">\r\n          <th mat-header-cell *matHeaderCellDef > Actual value </th>\r\n          <td mat-cell *matCellDef=\"let device\"> {{device.sensor.value}} </td>\r\n        </ng-container>\r\n        \r\n        <ng-container matColumnDef=\"set\">\r\n          <th mat-header-cell *matHeaderCellDef > Nominal value </th>\r\n          <td mat-cell *matCellDef=\"let device\"> {{device.actor.value}} </td>\r\n        </ng-container>\r\n        \r\n        <tr mat-header-row *matHeaderRowDef=\"columnNames\"></tr>\r\n        <tr mat-row *matRowDef=\"let row; columns: columnNames;\"></tr>\r\n      </table>\r\n    </div>\r\n  </div>\r\n</div>"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col align-self-center\">\n      <table mat-table [dataSource]=\"devices\" matSort class=\"mat-elevation-z8 center\">\n        \n        <ng-container matColumnDef=\"name\">\n          <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>\n          <td mat-cell *matCellDef=\"let device\"> {{device.name}} </td>\n        </ng-container>\n        \n        <ng-container matColumnDef=\"actual\">\n          <th mat-header-cell *matHeaderCellDef > Actual value </th>\n          <td mat-cell *matCellDef=\"let device\"> {{device.sensor.value}} </td>\n        </ng-container>\n        \n        <ng-container matColumnDef=\"set\">\n          <th mat-header-cell *matHeaderCellDef > Nominal value </th>\n          <td mat-cell *matCellDef=\"let device\"> {{device.actor.value}} </td>\n        </ng-container>\n        \n        <tr mat-header-row *matHeaderRowDef=\"columnNames\"></tr>\n        <tr mat-row *matRowDef=\"let row; columns: columnNames;\"></tr>\n      </table>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -423,7 +427,7 @@ module.exports = "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "table {\n  width: 100%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZGV2aWNlcy9DOlxcVXNlcnNcXEFsZXhcXERvY3VtZW50c1xcZmhcXDRzZW1lc3Rlclxcc2VjdXJpdHlcXFNtYXJ0RVBcXGZyb250ZW5kL3NyY1xcYXBwXFxkZXZpY2VzXFxkZXZpY2VzLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksV0FBVyxFQUFBIiwiZmlsZSI6InNyYy9hcHAvZGV2aWNlcy9kZXZpY2VzLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsidGFibGUge1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgfSJdfQ== */"
+module.exports = "table {\n  width: 100%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2FsZXgvZG9jdW1lbnRzL2ZoLzRfc2VtZXN0ZXIvc2VjdXJpdHkvU21hcnRFUC9mcm9udGVuZC9zcmMvYXBwL2RldmljZXMvZGV2aWNlcy5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLFdBQVcsRUFBQSIsImZpbGUiOiJzcmMvYXBwL2RldmljZXMvZGV2aWNlcy5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbInRhYmxlIHtcbiAgICB3aWR0aDogMTAwJTtcbiAgfSJdfQ== */"
 
 /***/ }),
 
@@ -542,7 +546,7 @@ var DevicesComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"col align-self-center\">\r\n      <table mat-table [dataSource]=\"actions\" matSort class=\"mat-elevation-z8 center\">\r\n        \r\n        <ng-container matColumnDef=\"action\">\r\n          <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>\r\n          <td mat-cell *matCellDef=\"let action\"> {{action.action}} </td>\r\n        </ng-container>\r\n        \r\n        <ng-container matColumnDef=\"stamp\">\r\n          <th mat-header-cell *matHeaderCellDef > Moment </th>\r\n          <td mat-cell *matCellDef=\"let action\"> {{action.stamp | date:'medium' }} </td>\r\n        </ng-container>\r\n        \r\n        <ng-container matColumnDef=\"user\">\r\n          <th mat-header-cell *matHeaderCellDef > User </th>\r\n          <td mat-cell *matCellDef=\"let action\"> {{action.user.name}} </td>\r\n        </ng-container>\r\n        \r\n        <tr mat-header-row *matHeaderRowDef=\"columnNames\"></tr>\r\n        <tr mat-row *matRowDef=\"let row; columns: columnNames;\"></tr>\r\n      </table>\r\n    </div>\r\n  </div>\r\n</div>"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col align-self-center\">\n      <table mat-table [dataSource]=\"actions\" matSort class=\"mat-elevation-z8 center\">\n        \n        <ng-container matColumnDef=\"action\">\n          <th mat-header-cell *matHeaderCellDef mat-sort-header > Action </th>\n          <td mat-cell *matCellDef=\"let action\"> {{action.action}} </td>\n        </ng-container>\n        \n        <ng-container matColumnDef=\"stamp\" >\n          <th mat-header-cell *matHeaderCellDef mat-sort-header > Moment </th>\n          <td mat-cell *matCellDef=\"let action\"> {{action.stamp | date:'medium' }} </td>\n        </ng-container>\n        \n        <ng-container matColumnDef=\"user\">\n          <th mat-header-cell *matHeaderCellDef > User </th>\n          <td mat-cell *matCellDef=\"let action\"> {{action.user.name}} </td>\n        </ng-container>\n        \n        <tr mat-header-row *matHeaderRowDef=\"columnNames\"></tr>\n        <tr mat-row *matRowDef=\"let row; columns: columnNames;\"></tr>\n      </table>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -553,7 +557,7 @@ module.exports = "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "table {\n  width: 100%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvaGlzdG9yeS9DOlxcVXNlcnNcXEFsZXhcXERvY3VtZW50c1xcZmhcXDRzZW1lc3Rlclxcc2VjdXJpdHlcXFNtYXJ0RVBcXGZyb250ZW5kL3NyY1xcYXBwXFxoaXN0b3J5XFxoaXN0b3J5LmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksV0FBVyxFQUFBIiwiZmlsZSI6InNyYy9hcHAvaGlzdG9yeS9oaXN0b3J5LmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsidGFibGUge1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgfSJdfQ== */"
+module.exports = "table {\n  width: 100%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2FsZXgvZG9jdW1lbnRzL2ZoLzRfc2VtZXN0ZXIvc2VjdXJpdHkvU21hcnRFUC9mcm9udGVuZC9zcmMvYXBwL2hpc3RvcnkvaGlzdG9yeS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLFdBQVcsRUFBQSIsImZpbGUiOiJzcmMvYXBwL2hpc3RvcnkvaGlzdG9yeS5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbInRhYmxlIHtcbiAgICB3aWR0aDogMTAwJTtcbiAgfSJdfQ== */"
 
 /***/ }),
 
@@ -570,6 +574,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var _services_action_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/action.service */ "./src/app/services/action.service.ts");
+/* harmony import */ var _services_refresh_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/refresh.service */ "./src/app/services/refresh.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -617,12 +622,24 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 var HistoryComponent = /** @class */ (function () {
-    function HistoryComponent(actionService) {
+    function HistoryComponent(actionService, refershService) {
+        var _this = this;
         this.actionService = actionService;
+        this.refershService = refershService;
         this.ngOnInit.bind(this);
         this.columnNames = ['action', 'stamp', 'user'];
+        this.refreshEvent = this.refershService.refresh.subscribe(function (key) {
+            if (key === 'History') {
+                _this.ngOnInit();
+            }
+        });
     }
+    HistoryComponent.prototype.ngOnDestroy = function () {
+        if (this.refershService)
+            this.refreshEvent.unsubscribe();
+    };
     HistoryComponent.prototype.ngOnInit = function () {
         return __awaiter(this, void 0, void 0, function () {
             var data;
@@ -656,7 +673,7 @@ var HistoryComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./history.component.html */ "./src/app/history/history.component.html"),
             styles: [__webpack_require__(/*! ./history.component.scss */ "./src/app/history/history.component.scss")]
         }),
-        __metadata("design:paramtypes", [_services_action_service__WEBPACK_IMPORTED_MODULE_2__["ActionService"]])
+        __metadata("design:paramtypes", [_services_action_service__WEBPACK_IMPORTED_MODULE_2__["ActionService"], _services_refresh_service__WEBPACK_IMPORTED_MODULE_3__["RefreshService"]])
     ], HistoryComponent);
     return HistoryComponent;
 }());
@@ -672,7 +689,7 @@ var HistoryComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\r\n  <div class=\"row\">\r\n    <div class=\"col-12\">\r\n      <form>\r\n        <div class=\"row justify-content-center\">\r\n          <img alt=\"Angular Logo\" src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==\">\r\n        </div>\r\n        <div id=\"form-container\">\r\n          <div class=\"row justify-content-center\">\r\n            <label><b>Username</b></label>\r\n          </div>\r\n          <div class=\"row justify-content-center\">\r\n            <input [(ngModel)]='username' name=\"user\" type=\"text\" placeholder=\"Enter Username\" required maxlength=\"30\" />\r\n          </div>\r\n          <div class=\"row justify-content-center\">\r\n            <label><b>Password</b></label>\r\n          </div>\r\n          <div class=\"row justify-content-center\">\r\n            <input type=\"password\" [(ngModel)]='keyword' autocomplete=\"on\" name=\"pw\" placeholder=\"Enter Passowrd\" required maxlength=\"100\" />\r\n          </div>\r\n          <div class=\"row justify-content-center\">\r\n            <input type=\"submit\" (click)=\"login()\" value=\"Login\" class=\"btn bg-success\" />\r\n          </div>\r\n          <div class=\"row justify-content-center\">\r\n            <a [routerLink]=\"['/register']\">Register as a new user</a>\r\n          </div>\r\n        </div>\r\n      </form>\r\n    </div>\r\n  </div>\r\n</div>"
+module.exports = "<div class=\"container-fluid\">\n  <div class=\"row\">\n    <div class=\"col-12\">\n      <form>\n        <div class=\"row justify-content-center\">\n          <img alt=\"Angular Logo\" src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==\">\n        </div>\n        <div id=\"form-container\">\n          <div class=\"row justify-content-center\">\n            <label><b>Username</b></label>\n          </div>\n          <div class=\"row justify-content-center\">\n            <input [(ngModel)]='username' name=\"user\" type=\"text\" placeholder=\"Enter Username\" required maxlength=\"30\" />\n          </div>\n          <div class=\"row justify-content-center\">\n            <label><b>Password</b></label>\n          </div>\n          <div class=\"row justify-content-center\">\n            <input type=\"password\" [(ngModel)]='keyword' autocomplete=\"on\" name=\"pw\" placeholder=\"Enter Passowrd\" required maxlength=\"100\" />\n          </div>\n          <div class=\"row justify-content-center\">\n            <input type=\"submit\" (click)=\"login()\" value=\"Login\" class=\"btn bg-success\" />\n          </div>\n          <div class=\"row justify-content-center\">\n            <a [routerLink]=\"['/register']\">Register as a new user</a>\n          </div>\n        </div>\n      </form>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -683,7 +700,7 @@ module.exports = "<div class=\"container-fluid\">\r\n  <div class=\"row\">\r\n  
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "img {\n  width: 150px; }\n\nform {\n  border-radius: 1em;\n  text-align: center;\n  width: -webkit-min-content;\n  width: -moz-min-content;\n  width: min-content;\n  margin: auto;\n  margin-top: 8%;\n  background-color: white;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 black;\n  height: 30em;\n  width: 18em; }\n\nform #form-container {\n    margin-top: 20px; }\n\nform .row {\n    margin-top: 0.5em;\n    padding: 3px; }\n\nform input[type=\"text\"], form input[type=\"password\"] {\n    border: 1px solid grey; }\n\nform input[type=\"submit\"] {\n    border-radius: 0.7em;\n    width: 40%; }\n\n@media only screen and (max-width: 800px) {\n  form {\n    width: 20em;\n    margin-top: 20%; }\n    form #form-container {\n      height: 80%; }\n  input[type=\"text\"], input[type=\"password\"] {\n    width: 60%;\n    font-size: 20px; }\n  input[type=\"submit\"] {\n    font-size: 20px; } }\n\n@media only screen and (max-width: 450px) {\n  form {\n    margin-top: 25%; } }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbG9naW4vQzpcXFVzZXJzXFxBbGV4XFxEb2N1bWVudHNcXGZoXFw0c2VtZXN0ZXJcXHNlY3VyaXR5XFxTbWFydEVQXFxmcm9udGVuZC9zcmNcXGFwcFxcbG9naW5cXGxvZ2luLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksWUFBWSxFQUFBOztBQUdoQjtFQUNJLGtCQUFrQjtFQUNsQixrQkFBa0I7RUFDbEIsMEJBQWtCO0VBQWxCLHVCQUFrQjtFQUFsQixrQkFBa0I7RUFDbEIsWUFBWTtFQUNaLGNBQWM7RUFDZCx1QkFBdUI7RUFDdkIsOERBQThEO0VBQzlELFlBQVk7RUFDWixXQUFXLEVBQUE7O0FBVGY7SUFZUSxnQkFBZ0IsRUFBQTs7QUFaeEI7SUFnQlEsaUJBQWlCO0lBQ2pCLFlBQVksRUFBQTs7QUFqQnBCO0lBcUJRLHNCQUFzQixFQUFBOztBQXJCOUI7SUF5QlEsb0JBQW9CO0lBQ3BCLFVBQVUsRUFBQTs7QUFJbEI7RUFFSTtJQUNJLFdBQVc7SUFDWCxlQUFlLEVBQUE7SUFGbkI7TUFLUSxXQUFXLEVBQUE7RUFJbkI7SUFDSSxVQUFVO0lBQ1YsZUFBZSxFQUFBO0VBR25CO0lBQ0ksZUFBZSxFQUFBLEVBQ2xCOztBQUdMO0VBQ0k7SUFDSSxlQUFlLEVBQUEsRUFDbEIiLCJmaWxlIjoic3JjL2FwcC9sb2dpbi9sb2dpbi5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImltZ3tcclxuICAgIHdpZHRoOiAxNTBweDtcclxufVxyXG5cclxuZm9ybSB7XHJcbiAgICBib3JkZXItcmFkaXVzOiAxZW07XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgICB3aWR0aDogbWluLWNvbnRlbnQ7XHJcbiAgICBtYXJnaW46IGF1dG87XHJcbiAgICBtYXJnaW4tdG9wOiA4JTtcclxuICAgIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xyXG4gICAgYm94LXNoYWRvdzogMCA0cHggOHB4IDAgcmdiYSgwLCAwLCAwLCAwLjIpLCAwIDZweCAyMHB4IDAgYmxhY2s7XHJcbiAgICBoZWlnaHQ6IDMwZW07XHJcbiAgICB3aWR0aDogMThlbTtcclxuXHJcbiAgICAjZm9ybS1jb250YWluZXJ7XHJcbiAgICAgICAgbWFyZ2luLXRvcDogMjBweDtcclxuICAgIH1cclxuXHJcbiAgICAucm93e1xyXG4gICAgICAgIG1hcmdpbi10b3A6IDAuNWVtO1xyXG4gICAgICAgIHBhZGRpbmc6IDNweDtcclxuICAgIH1cclxuXHJcbiAgICBpbnB1dFt0eXBlPVwidGV4dFwiXSwgaW5wdXRbdHlwZT1cInBhc3N3b3JkXCJde1xyXG4gICAgICAgIGJvcmRlcjogMXB4IHNvbGlkIGdyZXk7XHJcbiAgICB9XHJcblxyXG4gICAgaW5wdXRbdHlwZT1cInN1Ym1pdFwiXXtcclxuICAgICAgICBib3JkZXItcmFkaXVzOiAwLjdlbTtcclxuICAgICAgICB3aWR0aDogNDAlO1xyXG4gICAgfVxyXG59IFxyXG5cclxuQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA4MDBweCkge1xyXG5cclxuICAgIGZvcm17XHJcbiAgICAgICAgd2lkdGg6IDIwZW07XHJcbiAgICAgICAgbWFyZ2luLXRvcDogMjAlO1xyXG5cclxuICAgICAgICAjZm9ybS1jb250YWluZXJ7XHJcbiAgICAgICAgICAgIGhlaWdodDogODAlO1xyXG4gICAgICAgIH1cclxuICAgIH1cclxuXHJcbiAgICBpbnB1dFt0eXBlPVwidGV4dFwiXSwgaW5wdXRbdHlwZT1cInBhc3N3b3JkXCJde1xyXG4gICAgICAgIHdpZHRoOiA2MCU7XHJcbiAgICAgICAgZm9udC1zaXplOiAyMHB4O1xyXG4gICAgfVxyXG5cclxuICAgIGlucHV0W3R5cGU9XCJzdWJtaXRcIl17XHJcbiAgICAgICAgZm9udC1zaXplOiAyMHB4O1xyXG4gICAgfVxyXG59XHJcblxyXG5AbWVkaWEgb25seSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDQ1MHB4KSB7XHJcbiAgICBmb3Jte1xyXG4gICAgICAgIG1hcmdpbi10b3A6IDI1JTtcclxuICAgIH1cclxufSJdfQ== */"
+module.exports = "img {\n  width: 150px; }\n\nform {\n  border-radius: 1em;\n  text-align: center;\n  width: -webkit-min-content;\n  width: -moz-min-content;\n  width: min-content;\n  margin: auto;\n  margin-top: 8%;\n  background-color: white;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 black;\n  height: 30em;\n  width: 18em; }\n\nform #form-container {\n    margin-top: 20px; }\n\nform .row {\n    margin-top: 0.5em;\n    padding: 3px; }\n\nform input[type=\"text\"], form input[type=\"password\"] {\n    border: 1px solid grey; }\n\nform input[type=\"submit\"] {\n    border-radius: 0.7em;\n    width: 40%; }\n\n@media only screen and (max-width: 800px) {\n  form {\n    width: 20em;\n    margin-top: 20%; }\n    form #form-container {\n      height: 80%; }\n  input[type=\"text\"], input[type=\"password\"] {\n    width: 60%;\n    font-size: 20px; }\n  input[type=\"submit\"] {\n    font-size: 20px; } }\n\n@media only screen and (max-width: 450px) {\n  form {\n    margin-top: 25%; } }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2FsZXgvZG9jdW1lbnRzL2ZoLzRfc2VtZXN0ZXIvc2VjdXJpdHkvU21hcnRFUC9mcm9udGVuZC9zcmMvYXBwL2xvZ2luL2xvZ2luLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksWUFBWSxFQUFBOztBQUdoQjtFQUNJLGtCQUFrQjtFQUNsQixrQkFBa0I7RUFDbEIsMEJBQWtCO0VBQWxCLHVCQUFrQjtFQUFsQixrQkFBa0I7RUFDbEIsWUFBWTtFQUNaLGNBQWM7RUFDZCx1QkFBdUI7RUFDdkIsOERBQThEO0VBQzlELFlBQVk7RUFDWixXQUFXLEVBQUE7O0FBVGY7SUFZUSxnQkFBZ0IsRUFBQTs7QUFaeEI7SUFnQlEsaUJBQWlCO0lBQ2pCLFlBQVksRUFBQTs7QUFqQnBCO0lBcUJRLHNCQUFzQixFQUFBOztBQXJCOUI7SUF5QlEsb0JBQW9CO0lBQ3BCLFVBQVUsRUFBQTs7QUFJbEI7RUFFSTtJQUNJLFdBQVc7SUFDWCxlQUFlLEVBQUE7SUFGbkI7TUFLUSxXQUFXLEVBQUE7RUFJbkI7SUFDSSxVQUFVO0lBQ1YsZUFBZSxFQUFBO0VBR25CO0lBQ0ksZUFBZSxFQUFBLEVBQ2xCOztBQUdMO0VBQ0k7SUFDSSxlQUFlLEVBQUEsRUFDbEIiLCJmaWxlIjoic3JjL2FwcC9sb2dpbi9sb2dpbi5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImltZ3tcbiAgICB3aWR0aDogMTUwcHg7XG59XG5cbmZvcm0ge1xuICAgIGJvcmRlci1yYWRpdXM6IDFlbTtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgd2lkdGg6IG1pbi1jb250ZW50O1xuICAgIG1hcmdpbjogYXV0bztcbiAgICBtYXJnaW4tdG9wOiA4JTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbiAgICBib3gtc2hhZG93OiAwIDRweCA4cHggMCByZ2JhKDAsIDAsIDAsIDAuMiksIDAgNnB4IDIwcHggMCBibGFjaztcbiAgICBoZWlnaHQ6IDMwZW07XG4gICAgd2lkdGg6IDE4ZW07XG5cbiAgICAjZm9ybS1jb250YWluZXJ7XG4gICAgICAgIG1hcmdpbi10b3A6IDIwcHg7XG4gICAgfVxuXG4gICAgLnJvd3tcbiAgICAgICAgbWFyZ2luLXRvcDogMC41ZW07XG4gICAgICAgIHBhZGRpbmc6IDNweDtcbiAgICB9XG5cbiAgICBpbnB1dFt0eXBlPVwidGV4dFwiXSwgaW5wdXRbdHlwZT1cInBhc3N3b3JkXCJde1xuICAgICAgICBib3JkZXI6IDFweCBzb2xpZCBncmV5O1xuICAgIH1cblxuICAgIGlucHV0W3R5cGU9XCJzdWJtaXRcIl17XG4gICAgICAgIGJvcmRlci1yYWRpdXM6IDAuN2VtO1xuICAgICAgICB3aWR0aDogNDAlO1xuICAgIH1cbn0gXG5cbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1heC13aWR0aDogODAwcHgpIHtcblxuICAgIGZvcm17XG4gICAgICAgIHdpZHRoOiAyMGVtO1xuICAgICAgICBtYXJnaW4tdG9wOiAyMCU7XG5cbiAgICAgICAgI2Zvcm0tY29udGFpbmVye1xuICAgICAgICAgICAgaGVpZ2h0OiA4MCU7XG4gICAgICAgIH1cbiAgICB9XG5cbiAgICBpbnB1dFt0eXBlPVwidGV4dFwiXSwgaW5wdXRbdHlwZT1cInBhc3N3b3JkXCJde1xuICAgICAgICB3aWR0aDogNjAlO1xuICAgICAgICBmb250LXNpemU6IDIwcHg7XG4gICAgfVxuXG4gICAgaW5wdXRbdHlwZT1cInN1Ym1pdFwiXXtcbiAgICAgICAgZm9udC1zaXplOiAyMHB4O1xuICAgIH1cbn1cblxuQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA0NTBweCkge1xuICAgIGZvcm17XG4gICAgICAgIG1hcmdpbi10b3A6IDI1JTtcbiAgICB9XG59Il19 */"
 
 /***/ }),
 
@@ -800,6 +817,153 @@ var LoginComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/logs/logs.component.html":
+/*!******************************************!*\
+  !*** ./src/app/logs/logs.component.html ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col align-self-center\">\n      <table mat-table [dataSource]=\"logs\" matSort class=\"mat-elevation-z8 center\">\n        \n        <ng-container matColumnDef=\"message\">\n          <th mat-header-cell *matHeaderCellDef mat-sort-header> Message </th>\n          <td mat-cell *matCellDef=\"let log\"> {{log.message}} </td>\n        </ng-container>\n        \n        <ng-container matColumnDef=\"stamp\">\n          <th mat-header-cell *matHeaderCellDef mat-sort-header> Moment </th>\n          <td mat-cell *matCellDef=\"let log\"> {{log.stamp | date:'medium' }} </td>\n        </ng-container>\n        \n        <ng-container matColumnDef=\"user\">\n          <th mat-header-cell *matHeaderCellDef > User </th>\n          <td mat-cell *matCellDef=\"let log\"> {{log.user.name}} </td>\n        </ng-container>\n        \n        <tr mat-header-row *matHeaderRowDef=\"columnNames\"></tr>\n        <tr mat-row *matRowDef=\"let row; columns: columnNames;\"></tr>\n      </table>\n    </div>\n  </div>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/logs/logs.component.scss":
+/*!******************************************!*\
+  !*** ./src/app/logs/logs.component.scss ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "table {\n  width: 100%; }\n\n.mat-column-message {\n  max-width: 15rem;\n  word-wrap: Break-word;\n  padding: 0.5rem; }\n\n.mat-column-stamp {\n  max-width: 5rem;\n  padding: 0.5rem; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2FsZXgvZG9jdW1lbnRzL2ZoLzRfc2VtZXN0ZXIvc2VjdXJpdHkvU21hcnRFUC9mcm9udGVuZC9zcmMvYXBwL2xvZ3MvbG9ncy5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLFdBQVcsRUFBQTs7QUFHZjtFQUNFLGdCQUFnQjtFQUNoQixxQkFBcUI7RUFDckIsZUFBZSxFQUFBOztBQUVqQjtFQUNFLGVBQWU7RUFDZixlQUFlLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9sb2dzL2xvZ3MuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJ0YWJsZSB7XG4gICAgd2lkdGg6IDEwMCU7XG4gIH1cblxuLm1hdC1jb2x1bW4tbWVzc2FnZSB7XG4gIG1heC13aWR0aDogMTVyZW07XG4gIHdvcmQtd3JhcDogQnJlYWstd29yZDtcbiAgcGFkZGluZzogMC41cmVtO1xufVxuLm1hdC1jb2x1bW4tc3RhbXAge1xuICBtYXgtd2lkdGg6IDVyZW07XG4gIHBhZGRpbmc6IDAuNXJlbTtcbn0iXX0= */"
+
+/***/ }),
+
+/***/ "./src/app/logs/logs.component.ts":
+/*!****************************************!*\
+  !*** ./src/app/logs/logs.component.ts ***!
+  \****************************************/
+/*! exports provided: LogsComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LogsComponent", function() { return LogsComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_logs_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/logs.service */ "./src/app/services/logs.service.ts");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _services_refresh_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/refresh.service */ "./src/app/services/refresh.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+
+
+
+
+var LogsComponent = /** @class */ (function () {
+    function LogsComponent(logService, refershService) {
+        var _this = this;
+        this.logService = logService;
+        this.refershService = refershService;
+        console.log("new log instance");
+        this.ngOnInit.bind(this);
+        this.columnNames = ['message', 'stamp', 'user'];
+        this.refreshEvent = this.refershService.refresh.subscribe(function (key) {
+            if (key === 'Logs') {
+                _this.ngOnInit();
+            }
+        });
+    }
+    LogsComponent.prototype.ngOnDestroy = function () {
+        if (this.refershService)
+            this.refreshEvent.unsubscribe();
+    };
+    LogsComponent.prototype.ngOnInit = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var data;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.logService.getDevices()];
+                    case 1:
+                        data = _a.sent();
+                        if (!data)
+                            return [2 /*return*/];
+                        this.logs = new _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatTableDataSource"](data);
+                        this.logs.sort = this.sort;
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])(_angular_material__WEBPACK_IMPORTED_MODULE_2__["MatSort"]),
+        __metadata("design:type", _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatSort"])
+    ], LogsComponent.prototype, "sort", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatTableDataSource"])
+    ], LogsComponent.prototype, "logs", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Array)
+    ], LogsComponent.prototype, "columnNames", void 0);
+    LogsComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-logs',
+            template: __webpack_require__(/*! ./logs.component.html */ "./src/app/logs/logs.component.html"),
+            changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectionStrategy"].OnPush,
+            styles: [__webpack_require__(/*! ./logs.component.scss */ "./src/app/logs/logs.component.scss")]
+        }),
+        __metadata("design:paramtypes", [_services_logs_service__WEBPACK_IMPORTED_MODULE_1__["LogsService"], _services_refresh_service__WEBPACK_IMPORTED_MODULE_3__["RefreshService"]])
+    ], LogsComponent);
+    return LogsComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/navbar/navbar.component.html":
 /*!**********************************************!*\
   !*** ./src/app/navbar/navbar.component.html ***!
@@ -807,7 +971,7 @@ var LoginComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow mb-2\">\r\n  <a class=\"navbar-brand\" [routerLink]=\"['/pictures']\">\r\n    <img alt=\"Angular Logo\" src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==\">\r\n  </a>\r\n  <div class=\"collapse navbar-collapse\">\r\n    <ul class=\"navbar-nav\">\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" [routerLink]=\"['/pictures']\">Home</a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n  <div class=\"dropdown d-lg-none float-right\">\r\n    <button type=\"button\" class=\"bg-transparent border-0\" data-toggle=\"dropdown\">\r\n      <i class=\"material-icons\">\r\n        dehaze\r\n      </i>\r\n    </button>\r\n    <div class=\"dropdown-menu bg-dark pull-left\">\r\n      <a class=\"dropdown-item nav-link bg-dark text-light\" *ngIf=\"showLogin\" [routerLink]=\"['/login']\">Login</a>\r\n      <a class=\"dropdown-item nav-link bg-dark text-light\" *ngIf=\"!showLogin\" (click)=\"logout()\" [routerLink]=\"['/login']\">Logout</a>\r\n      <a class=\"dropdown-item nav-link bg-dark text-light\" *ngIf=\"showAdmin\" [routerLink]=\"['/admin']\">Admin</a>\r\n      <a class=\"dropdown-item nav-link bg-dark text-light\" *ngIf=\"showAdmin\" [routerLink]=\"['/history']\">History</a>\r\n    </div>\r\n  </div>\r\n  <div class=\"d-none d-lg-block\">\r\n    <ul class=\"navbar-nav\">\r\n      <li class=\"nav-item\" *ngIf=\"showLogin\">\r\n        <a class=\"nav-link\" [routerLink]=\"['/login']\">Login</a>\r\n      </li>\r\n      <li class=\"nav-item\" *ngIf=\"!showLogin\">\r\n        <a class=\"nav-link\" (click)=\"logout()\" [routerLink]=\"['/login']\">Logout</a>\r\n      </li>\r\n      <li class=\"nav-item\" *ngIf=\"showAdmin\">\r\n        <a class=\"nav-link\" [routerLink]=\"['/admin']\">Admin</a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</nav>"
+module.exports = "<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow mb-2\">\n  <a class=\"navbar-brand\" [routerLink]=\"['/pictures']\">\n    <img alt=\"Angular Logo\" src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==\">\n  </a>\n  <div class=\"collapse navbar-collapse\">\n    <ul class=\"navbar-nav\">\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" [routerLink]=\"['/pictures']\">Home</a>\n      </li>\n    </ul>\n  </div>\n  <div class=\"dropdown d-lg-none dropleft\">\n    <button type=\"button\" class=\"bg-transparent border-0\" data-toggle=\"dropdown\">\n      <i class=\"material-icons\">\n        dehaze\n      </i>\n    </button>\n    <div class=\"dropdown-menu bg-dark\">\n      <a class=\"dropdown-item nav-link bg-dark text-light\" *ngIf=\"showLogin\" [routerLink]=\"['/login']\">Login</a>\n      <a class=\"dropdown-item nav-link bg-dark text-light\" *ngIf=\"!showLogin\" (click)=\"logout()\" [routerLink]=\"['/login']\">Logout</a>\n      <a class=\"dropdown-item nav-link bg-dark text-light\" *ngIf=\"showAdmin\" [routerLink]=\"['/admin']\">Admin</a>\n    </div>\n  </div>\n  <div class=\"d-none d-lg-block\">\n    <ul class=\"navbar-nav\">\n      <li class=\"nav-item\" *ngIf=\"showLogin\">\n        <a class=\"nav-link\" [routerLink]=\"['/login']\">Login</a>\n      </li>\n      <li class=\"nav-item\" *ngIf=\"!showLogin\">\n        <a class=\"nav-link\" (click)=\"logout()\" [routerLink]=\"['/login']\">Logout</a>\n      </li>\n      <li class=\"nav-item\" *ngIf=\"showAdmin\">\n        <a class=\"nav-link\" [routerLink]=\"['/admin']\">Admin</a>\n      </li>\n    </ul>\n  </div>\n</nav>"
 
 /***/ }),
 
@@ -818,7 +982,7 @@ module.exports = "<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark fixed
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".navbar {\n  padding-top: 0px;\n  padding-bottom: 0px; }\n\nnav a img {\n  width: 50px; }\n\n.material-icons {\n  color: white;\n  font-size: 40px;\n  padding: 0; }\n\n.nav-link {\n  font-size: 18px; }\n\n#amount {\n  border-radius: 100%;\n  background-color: orangered;\n  font-size: 12px;\n  color: black;\n  padding: 4px; }\n\n#amountSpan {\n  position: absolute;\n  text-align: center;\n  padding-left: 1.7em;\n  padding-top: -3em; }\n\n#mobile {\n  visibility: none; }\n\n#cart {\n  float: right; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbmF2YmFyL0M6XFxVc2Vyc1xcQWxleFxcRG9jdW1lbnRzXFxmaFxcNHNlbWVzdGVyXFxzZWN1cml0eVxcU21hcnRFUFxcZnJvbnRlbmQvc3JjXFxhcHBcXG5hdmJhclxcbmF2YmFyLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0csZ0JBQWdCO0VBQ2hCLG1CQUFtQixFQUFBOztBQUd0QjtFQUNHLFdBQVcsRUFBQTs7QUFHZDtFQUNJLFlBQVc7RUFDWixlQUFlO0VBQ2YsVUFBVSxFQUFBOztBQUdaO0VBQ0csZUFBZSxFQUFBOztBQUdsQjtFQUNHLG1CQUFtQjtFQUNuQiwyQkFBMkI7RUFDM0IsZUFBZTtFQUNmLFlBQVk7RUFDWixZQUFZLEVBQUE7O0FBR2Y7RUFDSSxrQkFBa0I7RUFDbEIsa0JBQWtCO0VBQ2xCLG1CQUFtQjtFQUNuQixpQkFBaUIsRUFBQTs7QUFHckI7RUFDRyxnQkFBZ0IsRUFBQTs7QUFHbkI7RUFDRyxZQUFZLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9uYXZiYXIvbmF2YmFyLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLm5hdmJhcntcclxuICAgcGFkZGluZy10b3A6IDBweDtcclxuICAgcGFkZGluZy1ib3R0b206IDBweDtcclxufVxyXG5cclxubmF2IGEgaW1ne1xyXG4gICB3aWR0aDogNTBweDtcclxufVxyXG5cclxuLm1hdGVyaWFsLWljb25ze1xyXG4gICAgY29sb3I6d2hpdGU7XHJcbiAgIGZvbnQtc2l6ZTogNDBweDtcclxuICAgcGFkZGluZzogMDtcclxuIH1cclxuXHJcbiAubmF2LWxpbmt7XHJcbiAgICBmb250LXNpemU6IDE4cHg7XHJcbiB9XHJcblxyXG4gI2Ftb3VudHtcclxuICAgIGJvcmRlci1yYWRpdXM6IDEwMCU7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiBvcmFuZ2VyZWQ7XHJcbiAgICBmb250LXNpemU6IDEycHg7XHJcbiAgICBjb2xvcjogYmxhY2s7XHJcbiAgICBwYWRkaW5nOiA0cHg7XHJcbiB9XHJcblxyXG4gI2Ftb3VudFNwYW57XHJcbiAgICAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxuICAgICBwYWRkaW5nLWxlZnQ6IDEuN2VtO1xyXG4gICAgIHBhZGRpbmctdG9wOiAtM2VtO1xyXG4gfVxyXG5cclxuICNtb2JpbGV7XHJcbiAgICB2aXNpYmlsaXR5OiBub25lO1xyXG4gfVxyXG5cclxuICNjYXJ0e1xyXG4gICAgZmxvYXQ6IHJpZ2h0O1xyXG4gfVxyXG5cclxuIEBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1heC13aWR0aDogODAwcHgpIHtcclxufVxyXG5cclxuQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA0NTBweCkge1xyXG4gICAvLyAjbW9iaWxle1xyXG4gICAvLyAgICB2aXNpYmlsaXR5OiB2aXNpYmxlO1xyXG4gICAvLyB9XHJcblxyXG4gICAvLyAjZGVza3RvcHtcclxuICAgLy8gICAgLmRlc2t0b3B7XHJcbiAgIC8vICAgICAgIHZpc2liaWxpdHk6IG5vbmU7XHJcbiAgIC8vICAgIH1cclxuICAgLy8gfVxyXG59Il19 */"
+module.exports = ".navbar {\n  padding-top: 0px;\n  padding-bottom: 0px; }\n\nnav a img {\n  width: 50px; }\n\n.material-icons {\n  color: white;\n  font-size: 40px;\n  padding: 0; }\n\n.nav-link {\n  font-size: 18px; }\n\n#mobile {\n  visibility: none; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2FsZXgvZG9jdW1lbnRzL2ZoLzRfc2VtZXN0ZXIvc2VjdXJpdHkvU21hcnRFUC9mcm9udGVuZC9zcmMvYXBwL25hdmJhci9uYXZiYXIuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRyxnQkFBZ0I7RUFDaEIsbUJBQW1CLEVBQUE7O0FBR3RCO0VBQ0csV0FBVyxFQUFBOztBQUdkO0VBQ0ksWUFBVztFQUNaLGVBQWU7RUFDZixVQUFVLEVBQUE7O0FBR1o7RUFDRyxlQUFlLEVBQUE7O0FBR2xCO0VBQ0csZ0JBQWdCLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9uYXZiYXIvbmF2YmFyLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLm5hdmJhcntcbiAgIHBhZGRpbmctdG9wOiAwcHg7XG4gICBwYWRkaW5nLWJvdHRvbTogMHB4O1xufVxuXG5uYXYgYSBpbWd7XG4gICB3aWR0aDogNTBweDtcbn1cblxuLm1hdGVyaWFsLWljb25ze1xuICAgIGNvbG9yOndoaXRlO1xuICAgZm9udC1zaXplOiA0MHB4O1xuICAgcGFkZGluZzogMDtcbiB9XG5cbiAubmF2LWxpbmt7XG4gICAgZm9udC1zaXplOiAxOHB4O1xuIH1cblxuICNtb2JpbGV7XG4gICAgdmlzaWJpbGl0eTogbm9uZTtcbiB9Il19 */"
 
 /***/ }),
 
@@ -884,7 +1048,7 @@ var NavbarComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\r\n  <div class=\"row\">\r\n    <div class=\"col-12\">\r\n      <form (ngSubmit)=\"register()\">\r\n        <div class=\"row justify-content-center\">\r\n          <img alt=\"Angular Logo\" src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==\">\r\n        </div>\r\n        <div id=\"form-container\">\r\n          <div class=\"row justify-content-center\">\r\n            <label>Username:</label>\r\n          </div>\r\n          <div class=\"row justify-content-center\">\r\n            <input type=\"text\" autocomplete=\"name\" [(ngModel)]='name' name=\"user\" placeholder=\"Username\" />\r\n          </div>\r\n          <div class=\"row justify-content-center\">\r\n            <label>Password:</label>\r\n          </div>\r\n          <div class=\"row justify-content-center\">\r\n            <input type=\"password\" autocomplete=\"new-password\" [(ngModel)]='phraseOne' name=\"phraseOne\" placeholder=\"Password\" />\r\n          </div>\r\n          <div class=\"row justify-content-center\">\r\n            <label>Repeat Password:</label>\r\n          </div>\r\n          <div class=\"row justify-content-center\">\r\n            <input type=\"password\" autocomplete=\"new-password\" [(ngModel)]='phraseTwo' name=\"phraseTwo\" placeholder=\"Password\" />\r\n          </div>\r\n          <div class=\"row justify-content-center\">\r\n            <input [disabled]=\"disableSubmit()\" class=\"btn bg-success\" type=\"submit\" value=\"Register\" >\r\n          </div>\r\n        </div>\r\n      </form>\r\n    </div>\r\n  </div>\r\n</div>"
+module.exports = "<div class=\"container-fluid\">\n  <div class=\"row\">\n    <div class=\"col-12\">\n      <form (ngSubmit)=\"register()\">\n        <div class=\"row justify-content-center\">\n          <img alt=\"Angular Logo\" src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==\">\n        </div>\n        <div id=\"form-container\">\n          <div class=\"row justify-content-center\">\n            <label>Username:</label>\n          </div>\n          <div class=\"row justify-content-center\">\n            <input type=\"text\" autocomplete=\"name\" [(ngModel)]='name' name=\"user\" placeholder=\"Username\" />\n          </div>\n          <div class=\"row justify-content-center\">\n            <label>Password:</label>\n          </div>\n          <div class=\"row justify-content-center\">\n            <input type=\"password\" autocomplete=\"new-password\" [(ngModel)]='phraseOne' name=\"phraseOne\" placeholder=\"Password\" />\n          </div>\n          <div class=\"row justify-content-center\">\n            <label>Repeat Password:</label>\n          </div>\n          <div class=\"row justify-content-center\">\n            <input type=\"password\" autocomplete=\"new-password\" [(ngModel)]='phraseTwo' name=\"phraseTwo\" placeholder=\"Password\" />\n          </div>\n          <div class=\"row justify-content-center\">\n            <input [disabled]=\"disableSubmit()\" class=\"btn bg-success\" type=\"submit\" value=\"Register\" >\n          </div>\n        </div>\n      </form>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -895,7 +1059,7 @@ module.exports = "<div class=\"container-fluid\">\r\n  <div class=\"row\">\r\n  
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "img {\n  width: 150px; }\n\nform {\n  border-radius: 1em;\n  text-align: center;\n  width: -webkit-min-content;\n  width: -moz-min-content;\n  width: min-content;\n  margin: auto;\n  margin-top: 8%;\n  background-color: white;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 black;\n  height: 30em;\n  width: 18em; }\n\nform .row {\n    margin-top: 0.2em;\n    padding: 3px; }\n\nform input[type=\"text\"], form input[type=\"password\"] {\n    border: 1px solid grey; }\n\nform input[type=\"submit\"] {\n    border-radius: 0.7em;\n    width: 40%; }\n\nform input[tpye=\"submit\"]:disabled {\n    background-color: red !important;\n    color: black !important; }\n\n@media only screen and (max-width: 800px) {\n  form {\n    width: 20em;\n    margin-top: 20%; }\n    form #form-container {\n      height: 80%; }\n  input[type=\"text\"], input[type=\"password\"] {\n    width: 60%;\n    font-size: 20px; }\n  input[type=\"submit\"] {\n    font-size: 20px; } }\n\n@media only screen and (max-width: 450px) {\n  form {\n    margin-top: 25%; } }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcmVnaXN0ZXIvQzpcXFVzZXJzXFxBbGV4XFxEb2N1bWVudHNcXGZoXFw0c2VtZXN0ZXJcXHNlY3VyaXR5XFxTbWFydEVQXFxmcm9udGVuZC9zcmNcXGFwcFxccmVnaXN0ZXJcXHJlZ2lzdGVyLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksWUFBWSxFQUFBOztBQUdoQjtFQUNJLGtCQUFrQjtFQUNsQixrQkFBa0I7RUFDbEIsMEJBQWtCO0VBQWxCLHVCQUFrQjtFQUFsQixrQkFBa0I7RUFDbEIsWUFBWTtFQUNaLGNBQWM7RUFDZCx1QkFBdUI7RUFDdkIsOERBQThEO0VBQzlELFlBQVk7RUFDWixXQUFXLEVBQUE7O0FBVGY7SUFZUSxpQkFBaUI7SUFDakIsWUFBWSxFQUFBOztBQWJwQjtJQWtCUSxzQkFBc0IsRUFBQTs7QUFsQjlCO0lBc0JRLG9CQUFvQjtJQUNwQixVQUFVLEVBQUE7O0FBdkJsQjtJQTJCUSxnQ0FBZ0M7SUFDaEMsdUJBQXVCLEVBQUE7O0FBSS9CO0VBRUk7SUFDSSxXQUFXO0lBQ1gsZUFBZSxFQUFBO0lBRm5CO01BS1EsV0FBVyxFQUFBO0VBSW5CO0lBQ0ksVUFBVTtJQUNWLGVBQWUsRUFBQTtFQUduQjtJQUNJLGVBQWUsRUFBQSxFQUNsQjs7QUFHTDtFQUNJO0lBQ0ksZUFBZSxFQUFBLEVBQ2xCIiwiZmlsZSI6InNyYy9hcHAvcmVnaXN0ZXIvcmVnaXN0ZXIuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpbWd7XHJcbiAgICB3aWR0aDogMTUwcHg7XHJcbn1cclxuXHJcbmZvcm0ge1xyXG4gICAgYm9yZGVyLXJhZGl1czogMWVtO1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICAgd2lkdGg6IG1pbi1jb250ZW50O1xyXG4gICAgbWFyZ2luOiBhdXRvO1xyXG4gICAgbWFyZ2luLXRvcDogOCU7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcclxuICAgIGJveC1zaGFkb3c6IDAgNHB4IDhweCAwIHJnYmEoMCwgMCwgMCwgMC4yKSwgMCA2cHggMjBweCAwIGJsYWNrO1xyXG4gICAgaGVpZ2h0OiAzMGVtO1xyXG4gICAgd2lkdGg6IDE4ZW07XHJcblxyXG4gICAgLnJvd3tcclxuICAgICAgICBtYXJnaW4tdG9wOiAwLjJlbTtcclxuICAgICAgICBwYWRkaW5nOiAzcHg7XHJcbiAgICB9XHJcblxyXG5cclxuICAgIGlucHV0W3R5cGU9XCJ0ZXh0XCJdLCBpbnB1dFt0eXBlPVwicGFzc3dvcmRcIl17XHJcbiAgICAgICAgYm9yZGVyOiAxcHggc29saWQgZ3JleTtcclxuICAgIH1cclxuXHJcbiAgICBpbnB1dFt0eXBlPVwic3VibWl0XCJde1xyXG4gICAgICAgIGJvcmRlci1yYWRpdXM6IDAuN2VtO1xyXG4gICAgICAgIHdpZHRoOiA0MCU7XHJcbiAgICB9XHJcblxyXG4gICAgaW5wdXRbdHB5ZT1cInN1Ym1pdFwiXTpkaXNhYmxlZCB7XHJcbiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogcmVkICFpbXBvcnRhbnQ7XHJcbiAgICAgICAgY29sb3I6IGJsYWNrICFpbXBvcnRhbnQ7XHJcbiAgICB9XHJcbn0gXHJcblxyXG5AbWVkaWEgb25seSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDgwMHB4KSB7XHJcblxyXG4gICAgZm9ybXtcclxuICAgICAgICB3aWR0aDogMjBlbTtcclxuICAgICAgICBtYXJnaW4tdG9wOiAyMCU7XHJcblxyXG4gICAgICAgICNmb3JtLWNvbnRhaW5lcntcclxuICAgICAgICAgICAgaGVpZ2h0OiA4MCU7XHJcbiAgICAgICAgfVxyXG4gICAgfVxyXG5cclxuICAgIGlucHV0W3R5cGU9XCJ0ZXh0XCJdLCBpbnB1dFt0eXBlPVwicGFzc3dvcmRcIl17XHJcbiAgICAgICAgd2lkdGg6IDYwJTtcclxuICAgICAgICBmb250LXNpemU6IDIwcHg7XHJcbiAgICB9XHJcblxyXG4gICAgaW5wdXRbdHlwZT1cInN1Ym1pdFwiXXtcclxuICAgICAgICBmb250LXNpemU6IDIwcHg7XHJcbiAgICB9XHJcbn1cclxuXHJcbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1heC13aWR0aDogNDUwcHgpIHtcclxuICAgIGZvcm17XHJcbiAgICAgICAgbWFyZ2luLXRvcDogMjUlO1xyXG4gICAgfVxyXG59Il19 */"
+module.exports = "img {\n  width: 150px; }\n\nform {\n  border-radius: 1em;\n  text-align: center;\n  width: -webkit-min-content;\n  width: -moz-min-content;\n  width: min-content;\n  margin: auto;\n  margin-top: 8%;\n  background-color: white;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 black;\n  height: 30em;\n  width: 18em; }\n\nform .row {\n    margin-top: 0.2em;\n    padding: 3px; }\n\nform input[type=\"text\"], form input[type=\"password\"] {\n    border: 1px solid grey; }\n\nform input[type=\"submit\"] {\n    border-radius: 0.7em;\n    width: 40%; }\n\nform input[tpye=\"submit\"]:disabled {\n    background-color: red !important;\n    color: black !important; }\n\n@media only screen and (max-width: 800px) {\n  form {\n    width: 20em;\n    margin-top: 20%; }\n    form #form-container {\n      height: 80%; }\n  input[type=\"text\"], input[type=\"password\"] {\n    width: 60%;\n    font-size: 20px; }\n  input[type=\"submit\"] {\n    font-size: 20px; } }\n\n@media only screen and (max-width: 450px) {\n  form {\n    margin-top: 25%; } }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2FsZXgvZG9jdW1lbnRzL2ZoLzRfc2VtZXN0ZXIvc2VjdXJpdHkvU21hcnRFUC9mcm9udGVuZC9zcmMvYXBwL3JlZ2lzdGVyL3JlZ2lzdGVyLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksWUFBWSxFQUFBOztBQUdoQjtFQUNJLGtCQUFrQjtFQUNsQixrQkFBa0I7RUFDbEIsMEJBQWtCO0VBQWxCLHVCQUFrQjtFQUFsQixrQkFBa0I7RUFDbEIsWUFBWTtFQUNaLGNBQWM7RUFDZCx1QkFBdUI7RUFDdkIsOERBQThEO0VBQzlELFlBQVk7RUFDWixXQUFXLEVBQUE7O0FBVGY7SUFZUSxpQkFBaUI7SUFDakIsWUFBWSxFQUFBOztBQWJwQjtJQWtCUSxzQkFBc0IsRUFBQTs7QUFsQjlCO0lBc0JRLG9CQUFvQjtJQUNwQixVQUFVLEVBQUE7O0FBdkJsQjtJQTJCUSxnQ0FBZ0M7SUFDaEMsdUJBQXVCLEVBQUE7O0FBSS9CO0VBRUk7SUFDSSxXQUFXO0lBQ1gsZUFBZSxFQUFBO0lBRm5CO01BS1EsV0FBVyxFQUFBO0VBSW5CO0lBQ0ksVUFBVTtJQUNWLGVBQWUsRUFBQTtFQUduQjtJQUNJLGVBQWUsRUFBQSxFQUNsQjs7QUFHTDtFQUNJO0lBQ0ksZUFBZSxFQUFBLEVBQ2xCIiwiZmlsZSI6InNyYy9hcHAvcmVnaXN0ZXIvcmVnaXN0ZXIuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpbWd7XG4gICAgd2lkdGg6IDE1MHB4O1xufVxuXG5mb3JtIHtcbiAgICBib3JkZXItcmFkaXVzOiAxZW07XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgIHdpZHRoOiBtaW4tY29udGVudDtcbiAgICBtYXJnaW46IGF1dG87XG4gICAgbWFyZ2luLXRvcDogOCU7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gICAgYm94LXNoYWRvdzogMCA0cHggOHB4IDAgcmdiYSgwLCAwLCAwLCAwLjIpLCAwIDZweCAyMHB4IDAgYmxhY2s7XG4gICAgaGVpZ2h0OiAzMGVtO1xuICAgIHdpZHRoOiAxOGVtO1xuXG4gICAgLnJvd3tcbiAgICAgICAgbWFyZ2luLXRvcDogMC4yZW07XG4gICAgICAgIHBhZGRpbmc6IDNweDtcbiAgICB9XG5cblxuICAgIGlucHV0W3R5cGU9XCJ0ZXh0XCJdLCBpbnB1dFt0eXBlPVwicGFzc3dvcmRcIl17XG4gICAgICAgIGJvcmRlcjogMXB4IHNvbGlkIGdyZXk7XG4gICAgfVxuXG4gICAgaW5wdXRbdHlwZT1cInN1Ym1pdFwiXXtcbiAgICAgICAgYm9yZGVyLXJhZGl1czogMC43ZW07XG4gICAgICAgIHdpZHRoOiA0MCU7XG4gICAgfVxuXG4gICAgaW5wdXRbdHB5ZT1cInN1Ym1pdFwiXTpkaXNhYmxlZCB7XG4gICAgICAgIGJhY2tncm91bmQtY29sb3I6IHJlZCAhaW1wb3J0YW50O1xuICAgICAgICBjb2xvcjogYmxhY2sgIWltcG9ydGFudDtcbiAgICB9XG59IFxuXG5AbWVkaWEgb25seSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDgwMHB4KSB7XG5cbiAgICBmb3Jte1xuICAgICAgICB3aWR0aDogMjBlbTtcbiAgICAgICAgbWFyZ2luLXRvcDogMjAlO1xuXG4gICAgICAgICNmb3JtLWNvbnRhaW5lcntcbiAgICAgICAgICAgIGhlaWdodDogODAlO1xuICAgICAgICB9XG4gICAgfVxuXG4gICAgaW5wdXRbdHlwZT1cInRleHRcIl0sIGlucHV0W3R5cGU9XCJwYXNzd29yZFwiXXtcbiAgICAgICAgd2lkdGg6IDYwJTtcbiAgICAgICAgZm9udC1zaXplOiAyMHB4O1xuICAgIH1cblxuICAgIGlucHV0W3R5cGU9XCJzdWJtaXRcIl17XG4gICAgICAgIGZvbnQtc2l6ZTogMjBweDtcbiAgICB9XG59XG5cbkBtZWRpYSBvbmx5IHNjcmVlbiBhbmQgKG1heC13aWR0aDogNDUwcHgpIHtcbiAgICBmb3Jte1xuICAgICAgICBtYXJnaW4tdG9wOiAyNSU7XG4gICAgfVxufSJdfQ== */"
 
 /***/ }),
 
@@ -1080,7 +1244,6 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 var ActionService = /** @class */ (function () {
     function ActionService(auth) {
         this.auth = auth;
-        this._actions = [];
     }
     ActionService.prototype.getActions = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -1104,7 +1267,6 @@ var ActionService = /** @class */ (function () {
                         })
                             .then(function (data) {
                             if (data) {
-                                _this._actions = data;
                                 resolve(data);
                             }
                         })
@@ -1561,6 +1723,116 @@ var FlagsService = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/services/logs.service.ts":
+/*!******************************************!*\
+  !*** ./src/app/services/logs.service.ts ***!
+  \******************************************/
+/*! exports provided: LogsService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LogsService", function() { return LogsService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./auth.service */ "./src/app/services/auth.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var LogsService = /** @class */ (function () {
+    function LogsService(auth) {
+        this.auth = auth;
+    }
+    LogsService.prototype.getDevices = function () {
+        return fetch(location.origin + '/api/logs', {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: this.auth.getToken()
+            }
+        })
+            .then(function (res) {
+            if (res.ok) {
+                return res.json();
+            }
+            else {
+                return [];
+            }
+        })
+            .then(function (data) {
+            if (data) {
+                return data;
+            }
+            else {
+                return null;
+            }
+        })
+            .catch(function (err) { return console.log(err); });
+    };
+    LogsService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"]])
+    ], LogsService);
+    return LogsService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/refresh.service.ts":
+/*!*********************************************!*\
+  !*** ./src/app/services/refresh.service.ts ***!
+  \*********************************************/
+/*! exports provided: RefreshService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RefreshService", function() { return RefreshService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var RefreshService = /** @class */ (function () {
+    function RefreshService() {
+        this.refresh = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+    }
+    RefreshService.prototype.trigger = function (key) {
+        if (!key)
+            return;
+        this.refresh.emit(key);
+    };
+    RefreshService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [])
+    ], RefreshService);
+    return RefreshService;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/services/roleguard.service.ts":
 /*!***********************************************!*\
   !*** ./src/app/services/roleguard.service.ts ***!
@@ -1620,7 +1892,7 @@ var RoleguardService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"col align-self-center\">\r\n      <table mat-table [dataSource]=\"devices\" matSort class=\"mat-elevation-z8 center\">\r\n        \r\n        <ng-container matColumnDef=\"name\">\r\n          <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>\r\n          <td mat-cell *matCellDef=\"let device\">\r\n            <input matInput [(ngModel)]=\"device.name\">\r\n          </td>\r\n        </ng-container>\r\n        \r\n        <ng-container matColumnDef=\"actual\">\r\n          <th mat-header-cell *matHeaderCellDef > Actual value </th>\r\n          <td mat-cell *matCellDef=\"let device\"> {{device.sensor.value}} </td>\r\n        </ng-container>\r\n        \r\n        <ng-container matColumnDef=\"set\">\r\n          <th mat-header-cell *matHeaderCellDef > Nominal value </th>\r\n          <td mat-cell *matCellDef=\"let device\"> {{device.actor.value}} </td>\r\n        </ng-container>\r\n        \r\n        <tr mat-header-row *matHeaderRowDef=\"columnNames\"></tr>\r\n        <tr mat-row *matRowDef=\"let row; columns: columnNames;\"></tr>\r\n      </table>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"col mt-2 mb-1\">\r\n      <div class=\"row float-right\" >\r\n        <input tpye=\"button\" readonly=\"true\" value=\"Save\" class=\"btn btn-primary mr-3\" (click)=\"save()\"/>\r\n      </div>\r\n        <input tpye=\"button\" readonly=\"true\" value=\"{{msg}}\" class=\"btn w-50 disabled\" \r\n         [ngClass]=\"{\r\n           'btn-outline-danger': !success && msg,\r\n           'btn-outline-success': success && msg,\r\n           'collapse':!msg\r\n         }\"\r\n        />\r\n    </div>\r\n  </div>\r\n</div>"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col align-self-center\">\n      <table mat-table [dataSource]=\"devices\" matSort class=\"mat-elevation-z8 center\">\n        \n        <ng-container matColumnDef=\"name\">\n          <th mat-header-cell *matHeaderCellDef mat-sort-header > Name </th>\n          <td mat-cell *matCellDef=\"let device\">\n            <input matInput [(ngModel)]=\"device.name\">\n          </td>\n        </ng-container>\n        \n        <ng-container matColumnDef=\"actual\">\n          <th mat-header-cell *matHeaderCellDef  mat-sort-header > Actual value </th>\n          <td mat-cell *matCellDef=\"let device\"> {{device.sensor.value}} </td>\n        </ng-container>\n        \n        <ng-container matColumnDef=\"set\">\n          <th mat-header-cell *matHeaderCellDef > Nominal value </th>\n          <td mat-cell *matCellDef=\"let device\"> {{device.actor.value}} </td>\n        </ng-container>\n        \n        <tr mat-header-row *matHeaderRowDef=\"columnNames\"></tr>\n        <tr mat-row *matRowDef=\"let row; columns: columnNames;\"></tr>\n      </table>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col mt-2 mb-1\">\n      <div class=\"row float-right\" >\n        <input tpye=\"button\" readonly=\"true\" value=\"Save\" class=\"btn btn-primary mr-3\" (click)=\"save()\"/>\n      </div>\n        <input tpye=\"button\" readonly=\"true\" value=\"{{msg}}\" class=\"btn w-50 disabled\" \n         [ngClass]=\"{\n           'btn-outline-danger': !success && msg,\n           'btn-outline-success': success && msg,\n           'collapse':!msg\n         }\"\n        />\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -1631,7 +1903,7 @@ module.exports = "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "table {\n  width: 100%; }\n\ninput {\n  border: 0px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc2V0dGluZ3MvQzpcXFVzZXJzXFxBbGV4XFxEb2N1bWVudHNcXGZoXFw0c2VtZXN0ZXJcXHNlY3VyaXR5XFxTbWFydEVQXFxmcm9udGVuZC9zcmNcXGFwcFxcc2V0dGluZ3NcXHNldHRpbmdzLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksV0FBVyxFQUFBOztBQUdmO0VBQ0ksV0FBVyxFQUFBIiwiZmlsZSI6InNyYy9hcHAvc2V0dGluZ3Mvc2V0dGluZ3MuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJ0YWJsZSB7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICB9XHJcblxyXG5pbnB1dHtcclxuICAgIGJvcmRlcjogMHB4O1xyXG59Il19 */"
+module.exports = "table {\n  width: 100%; }\n\ninput {\n  border: 0px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2FsZXgvZG9jdW1lbnRzL2ZoLzRfc2VtZXN0ZXIvc2VjdXJpdHkvU21hcnRFUC9mcm9udGVuZC9zcmMvYXBwL3NldHRpbmdzL3NldHRpbmdzLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksV0FBVyxFQUFBOztBQUdmO0VBQ0ksV0FBVyxFQUFBIiwiZmlsZSI6InNyYy9hcHAvc2V0dGluZ3Mvc2V0dGluZ3MuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJ0YWJsZSB7XG4gICAgd2lkdGg6IDEwMCU7XG4gIH1cblxuaW5wdXR7XG4gICAgYm9yZGVyOiAwcHg7XG59Il19 */"
 
 /***/ }),
 
@@ -1648,6 +1920,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_device_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/device.service */ "./src/app/services/device.service.ts");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _services_refresh_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/refresh.service */ "./src/app/services/refresh.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1695,12 +1968,24 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 var SettingsComponent = /** @class */ (function () {
-    function SettingsComponent(deviceService) {
+    function SettingsComponent(deviceService, refershService) {
+        var _this = this;
         this.deviceService = deviceService;
+        this.refershService = refershService;
         this.ngOnInit.bind(this);
         this.columnNames = ['name', 'actual', 'set'];
+        this.refreshEvent = this.refershService.refresh.subscribe(function (key) {
+            if (key === 'Settings') {
+                _this.ngOnInit();
+            }
+        });
     }
+    SettingsComponent.prototype.ngOnDestroy = function () {
+        if (this.refershService)
+            this.refreshEvent.unsubscribe();
+    };
     SettingsComponent.prototype.ngOnInit = function () {
         return __awaiter(this, void 0, void 0, function () {
             var data;
@@ -1767,7 +2052,7 @@ var SettingsComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./settings.component.html */ "./src/app/settings/settings.component.html"),
             styles: [__webpack_require__(/*! ./settings.component.scss */ "./src/app/settings/settings.component.scss")]
         }),
-        __metadata("design:paramtypes", [_services_device_service__WEBPACK_IMPORTED_MODULE_1__["DeviceService"]])
+        __metadata("design:paramtypes", [_services_device_service__WEBPACK_IMPORTED_MODULE_1__["DeviceService"], _services_refresh_service__WEBPACK_IMPORTED_MODULE_3__["RefreshService"]])
     ], SettingsComponent);
     return SettingsComponent;
 }());
@@ -1843,7 +2128,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Alex\Documents\fh\4semester\security\SmartEP\frontend\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /home/alex/documents/fh/4_semester/security/SmartEP/frontend/src/main.ts */"./src/main.ts");
 
 
 /***/ })

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { DeviceService } from '../services/device.service';
 import { Device } from '../classes/Device';
 import { MatSort, MatTableDataSource } from '@angular/material';
@@ -9,16 +9,22 @@ import { RefreshService } from '../services/refresh.service';
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss']
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent implements OnInit, OnDestroy {
+
+  ngOnDestroy(): void {
+    if(this.refershService) this.refreshEvent.unsubscribe();
+  }
 
   @ViewChild(MatSort) sort: MatSort;
+
+  private refreshEvent : any;
 
   constructor(private deviceService : DeviceService, private refershService: RefreshService) {
     
     this.ngOnInit.bind(this);
     this.columnNames = ['name','actual','set'];
 
-    this.refershService.refresh.subscribe(key => {
+    this.refreshEvent = this.refershService.refresh.subscribe(key => {
       if(key === 'Settings'){
         this.ngOnInit();
       }

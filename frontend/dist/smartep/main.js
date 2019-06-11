@@ -630,12 +630,16 @@ var HistoryComponent = /** @class */ (function () {
         this.refershService = refershService;
         this.ngOnInit.bind(this);
         this.columnNames = ['action', 'stamp', 'user'];
-        this.refershService.refresh.subscribe(function (key) {
+        this.refreshEvent = this.refershService.refresh.subscribe(function (key) {
             if (key === 'History') {
                 _this.ngOnInit();
             }
         });
     }
+    HistoryComponent.prototype.ngOnDestroy = function () {
+        if (this.refershService)
+            this.refreshEvent.unsubscribe();
+    };
     HistoryComponent.prototype.ngOnInit = function () {
         return __awaiter(this, void 0, void 0, function () {
             var data;
@@ -902,14 +906,19 @@ var LogsComponent = /** @class */ (function () {
         var _this = this;
         this.logService = logService;
         this.refershService = refershService;
+        console.log("new log instance");
         this.ngOnInit.bind(this);
         this.columnNames = ['message', 'stamp', 'user'];
-        this.refershService.refresh.subscribe(function (key) {
+        this.refreshEvent = this.refershService.refresh.subscribe(function (key) {
             if (key === 'Logs') {
                 _this.ngOnInit();
             }
         });
     }
+    LogsComponent.prototype.ngOnDestroy = function () {
+        if (this.refershService)
+            this.refreshEvent.unsubscribe();
+    };
     LogsComponent.prototype.ngOnInit = function () {
         return __awaiter(this, void 0, void 0, function () {
             var data;
@@ -920,7 +929,6 @@ var LogsComponent = /** @class */ (function () {
                         data = _a.sent();
                         if (!data)
                             return [2 /*return*/];
-                        console.log(data);
                         this.logs = new _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatTableDataSource"](data);
                         this.logs.sort = this.sort;
                         return [2 /*return*/];
@@ -944,6 +952,7 @@ var LogsComponent = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-logs',
             template: __webpack_require__(/*! ./logs.component.html */ "./src/app/logs/logs.component.html"),
+            changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectionStrategy"].OnPush,
             styles: [__webpack_require__(/*! ./logs.component.scss */ "./src/app/logs/logs.component.scss")]
         }),
         __metadata("design:paramtypes", [_services_logs_service__WEBPACK_IMPORTED_MODULE_1__["LogsService"], _services_refresh_service__WEBPACK_IMPORTED_MODULE_3__["RefreshService"]])
@@ -1967,12 +1976,16 @@ var SettingsComponent = /** @class */ (function () {
         this.refershService = refershService;
         this.ngOnInit.bind(this);
         this.columnNames = ['name', 'actual', 'set'];
-        this.refershService.refresh.subscribe(function (key) {
+        this.refreshEvent = this.refershService.refresh.subscribe(function (key) {
             if (key === 'Settings') {
                 _this.ngOnInit();
             }
         });
     }
+    SettingsComponent.prototype.ngOnDestroy = function () {
+        if (this.refershService)
+            this.refreshEvent.unsubscribe();
+    };
     SettingsComponent.prototype.ngOnInit = function () {
         return __awaiter(this, void 0, void 0, function () {
             var data;
