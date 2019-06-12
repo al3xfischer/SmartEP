@@ -1,5 +1,8 @@
 # SmartEP
 
+# This application deliberately contains vulnerabilities!!!
+# Don't use it in production
+
 ### Existing users after Setup:
     -admin with pw: admin
     -user with pw: user
