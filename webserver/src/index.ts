@@ -109,7 +109,6 @@ export class Server {
     else{
       res.send(401).send();
     }
-
   }
 
   public getSecure(req: express.Request, res: express.Response) : void {
@@ -157,9 +156,11 @@ export class Server {
       let uuid = await this.store.getUserUuid(name);
       let userRole = await this.store.getUserRole(name);
       let token = await this.store.createToken(userRole,uuid);
-
       res.status(200).send(JSON.stringify(token));
     } else {
+      if(this.store.secure) {
+        this.log(`(${req.ip}) User "${name}" faild to login`);
+      }
       res.status(401).send();
     }
   }
