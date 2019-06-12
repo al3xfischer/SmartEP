@@ -1,8 +1,8 @@
 # SmartEP
-
+```diff
 # This application deliberately contains vulnerabilities!!!
 # Don't use it in production
-
+```
 ### Existing users after Setup:
     -admin with pw: admin
     -user with pw: user
@@ -22,7 +22,7 @@
 ## Database Setup
     To create the necessary DB tables use the database/setup.sql 
 
-## Usa without docker 
+## Use without docker 
     - change the directory to ./webserver/ and run "npm install" (only needed once) 
       run "npm start" or "npm run start-dev" for nodemon
     - change the directory to ./frontend/ and run "npm install" (only needed once)
